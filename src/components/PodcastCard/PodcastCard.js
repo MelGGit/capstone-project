@@ -26,8 +26,7 @@ const Card = styled.div`
   box-shadow: 0 0 10px rgb(25, 50, 81, 10%), 0 20px 40px rgb(25, 50, 81, 50%);
 `
 const PodcastImage = styled.img`
-  display: block;
-  overflow: hidden;
+  object-fit: cover;
   width: 100%;
 `
 
