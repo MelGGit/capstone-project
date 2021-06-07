@@ -8,17 +8,17 @@ PodcastListPage.propTypes = {
 
 export default function PodcastListPage({ podcasts }) {
   return (
-    <PageContainerPL>
+    <PageContainer>
       {podcasts.map(({ image, title, id }) => (
         <PodcastCard key={id} image={image} title={title} />
       ))}
-    </PageContainerPL>
+    </PageContainer>
   )
 }
 
-const PageContainerPL = styled.section`
+const PageContainer = styled.section`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 40px 20px;
 `
