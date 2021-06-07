@@ -11,9 +11,9 @@ export default function PodcastCard({ image, title }) {
     <Card>
       <Image
         src={image}
-        alt="Podcast Main Artwork"
-        width="100%"
-        height="clamp(350px, 75%, 800px)"
+        alt={`Podcast Picture of ${title}`}
+        width="150px"
+        height="150px"
       />
       <Title>{title}</Title>
     </Card>
@@ -32,7 +32,7 @@ const Card = styled.section`
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 `
 const Image = styled.img`
-  object-fit: contain;
+  align-self: center;
 `
 
 const Title = styled.h2`

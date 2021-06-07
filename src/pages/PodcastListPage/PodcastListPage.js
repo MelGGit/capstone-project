@@ -17,6 +17,7 @@ export default function PodcastListPage({ podcasts }) {
 }
 
 const PageContainer = styled.section`
+  margin: 2rem 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
