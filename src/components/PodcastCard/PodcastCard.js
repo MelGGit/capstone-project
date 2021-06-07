@@ -25,7 +25,7 @@ const Card = styled.section`
   flex-direction: column;
   gap: 1rem;
   border-radius: 16px;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 2rem;
   width: min(45%, 40rem);
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 15px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
