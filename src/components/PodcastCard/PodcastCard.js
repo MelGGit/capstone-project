@@ -1,115 +1,89 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import { useState } from 'react'
 
 PodcastCard.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  author: PropTypes.string,
-  description: PropTypes.string,
-  categories: PropTypes.object,
+  author: PropTypes.string.isRequired,
 }
 
 export default function PodcastCard({
   image,
   title,
   author,
-  description,
-  categories,
+  id,
+  onClickDetails,
 }) {
-  const [expanded, setExpanded] = useState(false)
-
   return (
-    <Card onClick={() => setExpanded(!expanded)} clicked={expanded}>
-      <CardMainContainer clicked={expanded}>
-        <Image
-          src={image}
-          alt={`Podcast Picture of `}
-          width="150px"
-          height="150px"
-        />
-        <InnerContainer>
-          <Title>{title}</Title>
-          <Author clicked={expanded}>by {author}</Author>
-        </InnerContainer>
-      </CardMainContainer>
-      {expanded && (
-        <CardExpandContainer>
-          <p>{description}</p>
-          <TagList>
-            {Object.entries(categories)?.map(([key, value]) => (
-              <Tag key={key}>{value}</Tag>
-            ))}
-          </TagList>
-        </CardExpandContainer>
-      )}
+    <Card>
+      <ImageContainer>
+        <Image src={image} alt={`Podcast `} width="150px" height="150px" />
+      </ImageContainer>
+      <InnerLayoutContainer>
+        <Title>{title}</Title>
+        <Author>{author}</Author>
+      </InnerLayoutContainer>
+      <SVG
+        onClick={() => onClickDetails(id)}
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="100%"
+        viewBox="0 0 20 20"
+      >
+        <path d="M10 12c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 6c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 18c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0z"></path>
+      </SVG>
     </Card>
   )
 }
 
 const Card = styled.section`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  cursor: pointer;
-  border-radius: 16px;
-  padding: 0.75rem 1rem;
-  width: ${props => (props.clicked ? '90%' : 'min(60%, 40rem)')};
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 15px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  display: grid;
+  grid-template-columns: 3rem 1fr 1rem;
+  height: 3rem;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0 1.5rem 0 1rem;
+`
+const ImageContainer = styled.div`
+  height: 3rem;
+  width: 3rem;
+  align-self: flex-start;
 `
 
-const CardMainContainer = styled.div`
-  display: flex;
-  flex-direction: ${props => (props.clicked ? 'row' : 'column')};
-  gap: 1rem;
-`
-
-const InnerContainer = styled.div`
+const InnerLayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  gap: 0.3rem;
 `
 
 const Image = styled.img`
-  align-self: center;
+  height: 3rem;
+  width: 3rem;
 `
 const Author = styled.h3`
-  display: ${props => (props.clicked ? '' : 'none')};
-  font-size: clamp(0.5rem, -0.9rem + 8.333vw, 3.5rem);
-  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 100;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 90%;
+  color: var(--darker-grey);
 `
 
 const Title = styled.h2`
-  text-align: center;
-  font-size: clamp(0.5rem, -0.7rem + 8.333vw, 3rem);
-  width: 100%;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-`
-const CardExpandContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`
-const TagList = styled.ul`
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
-`
-
-const Tag = styled.li`
-  background: var(--mint);
-  color: var(--black);
-  list-style: none;
+  font-size: 0.9rem;
   font-weight: bold;
-  font-size: 0.875rem;
-  padding: 0.75rem 1rem;
-  border-radius: 0.25rem;
-  margin: 0 0.25rem 0.25rem 0;
-  display: list-item;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 90%;
+`
+const SVG = styled.svg`
+  fill: var(--darker-grey);
+  cursor: pointer;
 `

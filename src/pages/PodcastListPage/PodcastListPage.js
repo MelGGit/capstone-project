@@ -6,17 +6,17 @@ PodcastListPage.propTypes = {
   podcasts: PropTypes.array.isRequired,
 }
 
-export default function PodcastListPage({ podcasts }) {
+export default function PodcastListPage({ podcasts, onClickDetails }) {
   return (
     <PageContainer>
-      {podcasts.map(({ image, title, id, author, description, categories }) => (
+      {podcasts.map(({ image, title, id, author }) => (
         <PodcastCard
           key={id}
           image={image}
           title={title}
           author={author}
-          description={description}
-          categories={categories ? categories : {}}
+          id={id}
+          onClickDetails={onClickDetails}
         />
       ))}
     </PageContainer>
@@ -27,8 +27,5 @@ const PageContainer = styled.section`
   margin: 2rem 0;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 40px 20px;
+  gap: 0.8rem;
 `
