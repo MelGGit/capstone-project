@@ -5,6 +5,8 @@ PodcastCard.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  onClickDetails: PropTypes.func.isRequired,
 }
 
 export default function PodcastCard({
@@ -25,6 +27,7 @@ export default function PodcastCard({
       </InnerLayoutContainer>
       <SVG
         onClick={() => onClickDetails(id)}
+        data-testid="svg"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
@@ -48,7 +51,6 @@ const Card = styled.section`
 const ImageContainer = styled.div`
   height: 3rem;
   width: 3rem;
-  align-self: flex-start;
 `
 
 const InnerLayoutContainer = styled.div`

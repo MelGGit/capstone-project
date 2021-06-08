@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 PodcastListPage.propTypes = {
   podcasts: PropTypes.array.isRequired,
+  onClickDetails: PropTypes.func.isRequired,
 }
 
 export default function PodcastListPage({ podcasts, onClickDetails }) {

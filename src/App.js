@@ -9,22 +9,20 @@ function App() {
   const [detailedPodcast, setDetailedPodcast] = useState()
   const { push } = useHistory()
   return (
-    <>
-      <Switch>
-        <Route exact path="/">
-          <PodcastListPage
-            podcasts={podcasts}
-            onClickDetails={handleClickDetails}
-          />
-        </Route>
-        <Route path="/details">
-          <DetailsPage
-            podcast={detailedPodcast}
-            onClickDetailsBack={handleClickDetailsBack}
-          />
-        </Route>
-      </Switch>
-    </>
+    <Switch>
+      <Route exact path="/">
+        <PodcastListPage
+          podcasts={podcasts}
+          onClickDetails={handleClickDetails}
+        />
+      </Route>
+      <Route path="/details">
+        <DetailsPage
+          podcast={detailedPodcast}
+          onClickDetailsBack={handleClickDetailsBack}
+        />
+      </Route>
+    </Switch>
   )
 
   function handleClickDetails(id) {

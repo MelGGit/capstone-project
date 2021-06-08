@@ -1,4 +1,10 @@
 import styled from 'styled-components/macro'
+import PropTypes from 'prop-types'
+
+DetailsPage.propTypes = {
+  podcast: PropTypes.object.isRequired,
+  onClickDetailsBack: PropTypes.func.isRequired,
+}
 
 export default function DetailsPage({ podcast, onClickDetailsBack }) {
   const { image, title, author, description, categories } = podcast
@@ -39,7 +45,7 @@ const Wrapper = styled.section`
   width: 100%;
 `
 
-const HeaderContainer = styled.section`
+const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   gap: 1rem;
@@ -70,6 +76,10 @@ const Title = styled.h2`
 `
 const Author = styled.h3`
   font-weight: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `
 const Text = styled.p`
   margin-top: 3rem;
