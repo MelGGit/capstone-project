@@ -1,5 +1,6 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import LazyLoad from 'react-lazyload'
 
 PodcastCard.propTypes = {
   image: PropTypes.string.isRequired,
@@ -17,26 +18,26 @@ export default function PodcastCard({
   onClickDetails,
 }) {
   return (
-    <Card>
-      <ImageContainer>
-        <Image src={image} alt={`Podcast `} width="150px" height="150px" />
-      </ImageContainer>
-      <InnerLayoutContainer>
-        <Title>{title}</Title>
-        <Author>{author}</Author>
-      </InnerLayoutContainer>
-      <SVG
-        onClick={() => onClickDetails(id)}
-        data-testid="svg"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        width="100%"
-        height="100%"
-        viewBox="0 0 20 20"
-      >
-        <path d="M10 12c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 6c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 18c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0z"></path>
-      </SVG>
-    </Card>
+    <LazyLoad height={48} offset={96}>
+      <Card data-testid="card" onClick={() => onClickDetails(id)}>
+        <ImageContainer>
+          <Image src={image} alt={`Podcast `} width="150px" height="150px" />
+        </ImageContainer>
+        <InnerLayoutContainer>
+          <Title>{title}</Title>
+          <Author>{author}</Author>
+        </InnerLayoutContainer>
+        <SVG
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+          viewBox="0 0 20 20"
+        >
+          <path d="M10 12c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 6c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 18c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0z"></path>
+        </SVG>
+      </Card>
+    </LazyLoad>
   )
 }
 
@@ -47,6 +48,7 @@ const Card = styled.section`
   gap: 0.5rem;
   width: 100%;
   padding: 0 1.5rem 0 1rem;
+  cursor: pointer;
 `
 const ImageContainer = styled.div`
   height: 3rem;
@@ -87,5 +89,4 @@ const Title = styled.h2`
 `
 const SVG = styled.svg`
   fill: var(--darker-grey);
-  cursor: pointer;
 `

@@ -2,7 +2,7 @@ import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 
 DetailsPage.propTypes = {
-  podcast: PropTypes.object.isRequired,
+  podcast: PropTypes.object,
   onClickDetailsBack: PropTypes.func.isRequired,
 }
 
@@ -23,7 +23,13 @@ export default function DetailsPage({ podcast, onClickDetailsBack }) {
       </Button>
       <HeaderContainer>
         <ImageContainer>
-          <Image src={image} alt={`Podcast `} width="400px" height="400px" />
+          <Image
+            src={image}
+            alt={`Podcast `}
+            width="400px"
+            height="400px"
+            loading="lazy"
+          />
         </ImageContainer>
         <InnerContainer>
           <Title>{title}</Title>
@@ -31,11 +37,13 @@ export default function DetailsPage({ podcast, onClickDetailsBack }) {
         </InnerContainer>
       </HeaderContainer>
       <Text>{description}</Text>
-      <TagList>
-        {Object.entries(categories).map(([key, value]) => (
-          <Tag key={key}>{value}</Tag>
-        ))}
-      </TagList>
+      {categories && (
+        <TagList>
+          {Object.entries(categories).map(([key, value]) => (
+            <Tag key={key}>{value}</Tag>
+          ))}
+        </TagList>
+      )}
     </Wrapper>
   )
 }
@@ -99,8 +107,8 @@ const Tag = styled.li`
   list-style: none;
   font-weight: bold;
   font-size: 0.875rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 20px;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
   margin: 0 0.25rem 0.25rem 0;
   display: list-item;
 `

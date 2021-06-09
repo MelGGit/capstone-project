@@ -32,8 +32,8 @@ describe('PodcastCard', () => {
       />
     )
 
-    const back = screen.getByTestId('svg')
-    userEvent.click(back)
+    const details = screen.getByTestId('card')
+    userEvent.click(details)
     expect(onClickDetails).toHaveBeenCalledWith(1)
   })
 })
