@@ -1,13 +1,21 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import FavorizeButton from '../../components/FavorizeButton/FavorizeButton'
 
 DetailsPage.propTypes = {
   podcast: PropTypes.object,
   onClickDetailsBack: PropTypes.func.isRequired,
+  onToggleFavorite: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
 }
 
-export default function DetailsPage({ podcast, onClickDetailsBack }) {
-  const { image, title, author, description, categories } = podcast
+export default function DetailsPage({
+  podcast,
+  onClickDetailsBack,
+  onToggleFavorite,
+  isFavorite,
+}) {
+  const { image, title, id, author, description, categories } = podcast
   return (
     <Wrapper>
       <Button onClick={onClickDetailsBack}>
@@ -36,14 +44,21 @@ export default function DetailsPage({ podcast, onClickDetailsBack }) {
           <Author>{author}</Author>
         </InnerContainer>
       </HeaderContainer>
-      <Text>{description}</Text>
-      {categories && (
-        <TagList>
-          {Object.entries(categories).map(([key, value]) => (
-            <Tag key={key}>{value}</Tag>
-          ))}
-        </TagList>
-      )}
+      <BodyContainer>
+        <FavorizeButton
+          id={id}
+          onToggleFavorite={onToggleFavorite}
+          isFavorite={isFavorite}
+        />
+        <Text>{description}</Text>
+        {categories && (
+          <TagList>
+            {Object.entries(categories).map(([key, value]) => (
+              <Tag key={key}>{value}</Tag>
+            ))}
+          </TagList>
+        )}
+      </BodyContainer>
     </Wrapper>
   )
 }
@@ -59,7 +74,13 @@ const HeaderContainer = styled.div`
   gap: 1rem;
   margin-top: 2rem;
 `
-
+const BodyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 1rem;
+  margin-top: 2rem;
+`
 const InnerContainer = styled.div`
   display: flex;
   width: 50%;
@@ -90,7 +111,6 @@ const Author = styled.h3`
   overflow: hidden;
 `
 const Text = styled.p`
-  margin-top: 3rem;
   font-weight: 100;
   font-size: 0.8rem;
 `

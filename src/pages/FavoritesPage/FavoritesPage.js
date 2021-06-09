@@ -1,22 +1,15 @@
 import styled from 'styled-components/macro'
 import PodcastCard from '../../components/PodcastCard/PodcastCard'
-import PropTypes from 'prop-types'
 
-PodcastListPage.propTypes = {
-  podcasts: PropTypes.array.isRequired,
-  onClickDetails: PropTypes.func.isRequired,
-  onClickFavorites: PropTypes.func.isRequired,
-}
-
-export default function PodcastListPage({
-  podcasts,
+export default function FavoritesPage({
+  favoritePodcasts,
   onClickDetails,
-  onClickFavorites,
+  onClickBackFavorites,
 }) {
   return (
     <PageContainer>
-      <button onClick={onClickFavorites}>favorites</button>
-      {podcasts.map(({ image, title, id, author }) => (
+      <button onClick={onClickBackFavorites}>Back</button>
+      {favoritePodcasts.map(({ image, title, id, author }) => (
         <PodcastCard
           key={id}
           image={image}
