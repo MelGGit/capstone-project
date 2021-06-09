@@ -1,46 +1,92 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import LazyLoad from 'react-lazyload'
 
 PodcastCard.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  onClickDetails: PropTypes.func.isRequired,
 }
 
-export default function PodcastCard({ image, title }) {
+export default function PodcastCard({
+  image,
+  title,
+  author,
+  id,
+  onClickDetails,
+}) {
   return (
-    <Card>
-      <Image
-        src={image}
-        alt={`Podcast Picture of ${title}`}
-        width="150px"
-        height="150px"
-      />
-      <Title>{title}</Title>
-    </Card>
+    <LazyLoad height={48} offset={96}>
+      <Card data-testid="card" onClick={() => onClickDetails(id)}>
+        <ImageContainer>
+          <Image src={image} alt={`Podcast `} width="150px" height="150px" />
+        </ImageContainer>
+        <InnerLayoutContainer>
+          <Title>{title}</Title>
+          <Author>{author}</Author>
+        </InnerLayoutContainer>
+        <SVG
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+          viewBox="0 0 20 20"
+        >
+          <path d="M10 12c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 6c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 18c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0z"></path>
+        </SVG>
+      </Card>
+    </LazyLoad>
   )
 }
 
 const Card = styled.section`
+  display: grid;
+  grid-template-columns: 3rem 1fr 1rem;
+  height: 3rem;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0 1.5rem 0 1rem;
+  cursor: pointer;
+`
+const ImageContainer = styled.div`
+  height: 3rem;
+  width: 3rem;
+`
+
+const InnerLayoutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  border-radius: 16px;
-  padding: 0.75rem 1rem;
-  width: min(45%, 40rem);
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 15px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  gap: 0.3rem;
 `
+
 const Image = styled.img`
-  align-self: center;
+  height: 3rem;
+  width: 3rem;
+`
+const Author = styled.h3`
+  font-size: 0.8rem;
+  font-weight: 100;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 90%;
+  color: var(--darker-grey);
 `
 
 const Title = styled.h2`
-  text-align: center;
-  font-size: clamp(0.5rem, -0.875rem + 8.333vw, 3.5rem);
-  width: 100%;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+  font-size: 0.9rem;
+  font-weight: bold;
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 90%;
+`
+const SVG = styled.svg`
+  fill: var(--darker-grey);
 `
