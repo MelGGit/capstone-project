@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import PodcastCard from './PodcastCard'
+import { forceVisible } from 'react-lazyload'
 
 describe('PodcastCard', () => {
   it('renders an image and title', () => {
@@ -14,6 +15,7 @@ describe('PodcastCard', () => {
       />
     )
 
+    forceVisible()
     expect(screen.getByText('Murder On The Space Coast')).toBeInTheDocument()
     expect(screen.getByText('Someone')).toBeInTheDocument()
     expect(screen.getByRole('img')).toBeInTheDocument()
@@ -31,7 +33,7 @@ describe('PodcastCard', () => {
         onClickDetails={onClickDetails}
       />
     )
-
+    forceVisible()
     const details = screen.getByTestId('card')
     userEvent.click(details)
     expect(onClickDetails).toHaveBeenCalledWith(1)

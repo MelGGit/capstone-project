@@ -9,8 +9,9 @@ FavorizeButton.propTypes = {
 
 export default function FavorizeButton({ isFavorite, onToggleFavorite, id }) {
   return (
-    <Button onClick={() => onToggleFavorite(id)}>
+    <Button data-testid="favorize-button" onClick={() => onToggleFavorite(id)}>
       <SVG
+        data-testid="svg"
         isFavorite={isFavorite}
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"

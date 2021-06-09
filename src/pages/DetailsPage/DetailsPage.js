@@ -18,7 +18,7 @@ export default function DetailsPage({
   const { image, title, id, author, description, categories } = podcast
   return (
     <Wrapper>
-      <Button onClick={onClickDetailsBack}>
+      <Button data-testid="back" onClick={onClickDetailsBack}>
         <SVG
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
