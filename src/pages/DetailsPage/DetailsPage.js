@@ -1,26 +1,17 @@
 import styled from 'styled-components/macro'
-import PropTypes from 'prop-types'
+import FavorizeButton from '../../components/FavorizeButton/FavorizeButton'
+import BackButton from '../../components/BackButton/BackButton'
+import { PageContainer } from '../../components/PageContainer/PageContainer'
+import { useRecoilValue } from 'recoil'
+import { detailedPodcastState } from '../../states'
 
-DetailsPage.propTypes = {
-  podcast: PropTypes.object,
-  onClickDetailsBack: PropTypes.func.isRequired,
-}
+export default function DetailsPage() {
+  const detailedPodcast = useRecoilValue(detailedPodcastState)
+  const { image, title, author, description, categories } = detailedPodcast
 
-export default function DetailsPage({ podcast, onClickDetailsBack }) {
-  const { image, title, author, description, categories } = podcast
   return (
-    <Wrapper>
-      <Button onClick={onClickDetailsBack}>
-        <SVG
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          width="100%"
-          height="100%"
-          viewBox="0 0 20 20"
-        >
-          <path d="M3.828 9l6.071-6.071-1.414-1.414-8.485 8.485 8.485 8.485 1.414-1.414-6.071-6.071h16.172v-2h-16.172z"></path>
-        </SVG>
-      </Button>
+    <PageContainer>
+      <BackButton />
       <HeaderContainer>
         <ImageContainer>
           <Image
@@ -36,22 +27,20 @@ export default function DetailsPage({ podcast, onClickDetailsBack }) {
           <Author>{author}</Author>
         </InnerContainer>
       </HeaderContainer>
-      <Text>{description}</Text>
-      {categories && (
-        <TagList>
-          {Object.entries(categories).map(([key, value]) => (
-            <Tag key={key}>{value}</Tag>
-          ))}
-        </TagList>
-      )}
-    </Wrapper>
+      <BodyContainer>
+        <FavorizeButton id={detailedPodcast?.id || 1} />
+        <Text>{description}</Text>
+        {categories && (
+          <TagList>
+            {Object.entries(categories).map(([key, value]) => (
+              <Tag key={key}>{value}</Tag>
+            ))}
+          </TagList>
+        )}
+      </BodyContainer>
+    </PageContainer>
   )
 }
-
-const Wrapper = styled.section`
-  padding: 1rem;
-  width: 100%;
-`
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -59,7 +48,12 @@ const HeaderContainer = styled.div`
   gap: 1rem;
   margin-top: 2rem;
 `
-
+const BodyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+`
 const InnerContainer = styled.div`
   display: flex;
   width: 50%;
@@ -90,7 +84,6 @@ const Author = styled.h3`
   overflow: hidden;
 `
 const Text = styled.p`
-  margin-top: 3rem;
   font-weight: 100;
   font-size: 0.8rem;
 `
@@ -105,21 +98,9 @@ const TagList = styled.ul`
 const Tag = styled.li`
   background: var(--black-akzent);
   list-style: none;
-  font-weight: bold;
-  font-size: 0.875rem;
-  padding: 0.75rem 1rem;
+  font-size: 0.7rem;
+  padding: 0.5rem 0.5rem;
   border-radius: 10px;
   margin: 0 0.25rem 0.25rem 0;
   display: list-item;
-`
-
-const SVG = styled.svg`
-  fill: var(--white);
-`
-const Button = styled.button`
-  background: none;
-  width: 1.5rem;
-  height: 1rem;
-  border: none;
-  cursor: pointer;
 `

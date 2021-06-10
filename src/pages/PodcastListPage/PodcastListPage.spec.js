@@ -1,6 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import PodcastListPage from './PodcastListPage'
+// needed since the component PodcastCard is lazy, it doesnt show in the jsdom
+// therefore the function forceVisible() is to show it in the dom for testing
+import { forceVisible } from 'react-lazyload'
 
 describe('PodcastListPage', () => {
   it('renders two Podcast Cards', () => {
@@ -21,8 +24,11 @@ describe('PodcastListPage', () => {
           },
         ]}
         onClickDetails={jest.fn()}
+        onClickFavorites={jest.fn()}
       />
     )
+
+    forceVisible()
 
     expect(screen.getByText('Murder On The Space Coast')).toBeInTheDocument()
     expect(screen.getByText('Some other')).toBeInTheDocument()
@@ -41,21 +47,15 @@ describe('PodcastListPage', () => {
             image: 'image1',
             author: 'author1',
           },
-          {
-            id: 2,
-            title: 'Some other',
-            image: 'image2',
-            author: 'author2',
-          },
         ]}
         onClickDetails={onClickDetails}
+        onClickFavorites={jest.fn()}
       />
     )
 
-    const back = screen.getAllByTestId('svg')
-    back.forEach(event => {
-      userEvent.click(event)
-      expect(onClickDetails).toHaveBeenCalledWith(1)
-    })
+    forceVisible()
+    const detailsPage = screen.getByTestId('card')
+    userEvent.click(detailsPage)
+    expect(onClickDetails).toHaveBeenCalledWith(1)
   })
 })
