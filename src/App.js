@@ -6,6 +6,7 @@ import FavoritesPage from './pages/FavoritesPage/FavoritesPage'
 
 function App() {
   const { push } = useHistory()
+
   return (
     <Switch>
       <Route exact path="/">

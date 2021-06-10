@@ -98,8 +98,7 @@ const TagList = styled.ul`
 const Tag = styled.li`
   background: var(--black-akzent);
   list-style: none;
-  font-weight: bold;
-  font-size: 0.875rem;
+  font-size: 0.7rem;
   padding: 0.5rem 0.5rem;
   border-radius: 10px;
   margin: 0 0.25rem 0.25rem 0;
