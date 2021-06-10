@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import PodcastListPage from './PodcastListPage'
+// needed since the component PodcastCard is lazy, it doesnt show in the jsdom
+// therefore the function forceVisible() is to show it in the dom for testing
 import { forceVisible } from 'react-lazyload'
 
 describe('PodcastListPage', () => {

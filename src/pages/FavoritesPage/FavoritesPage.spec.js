@@ -1,10 +1,12 @@
 import { render, screen } from '@testing-library/react'
 import FavoritesPage from './FavoritesPage'
+// needed since the component PodcastCard is lazy, it doesnt show in the jsdom
+// therefore the function forceVisible() is to show it in the dom for testing
 import { forceVisible } from 'react-lazyload'
 import userEvent from '@testing-library/user-event'
 
 describe('FavoritesPage', () => {
-  it('renders a podcast card and displays all given values', async () => {
+  it('renders a podcast card and displays all given values', () => {
     render(
       <FavoritesPage
         favoritePodcasts={[
@@ -25,7 +27,7 @@ describe('FavoritesPage', () => {
     expect(screen.getByRole('img')).toBeInTheDocument()
     expect(screen.getByRole('img').src).toEqual('http://localhost/some%20path')
   })
-  it('renders a button and the user is able to click it to go back', async () => {
+  it('renders a button and the user is able to click it to go back', () => {
     const back = jest.fn()
     render(
       <FavoritesPage

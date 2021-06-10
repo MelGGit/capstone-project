@@ -7,10 +7,10 @@ import { useState } from 'react'
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage'
 
 function App() {
-  const [detailedPodcast, setDetailedPodcast] = useState()
+  const [detailedPodcast, setDetailedPodcast] = useState({})
   const [favoritePodcasts, setFavoritePodcasts] = useState([])
   const [isFavorite, setIsFavorite] = useState(false)
-  const { push, goBack } = useHistory()
+  const { push } = useHistory()
   return (
     <Switch>
       <Route exact path="/">
@@ -24,13 +24,11 @@ function App() {
         <FavoritesPage
           favoritePodcasts={favoritePodcasts}
           onClickDetails={handleClickDetails}
-          onClickBackFavorites={handleClickBack}
         />
       </Route>
       <Route path="/details">
         <DetailsPage
           podcast={detailedPodcast}
-          onClickDetailsBack={handleClickBack}
           onToggleFavorite={handleToggleFavorite}
           isFavorite={isFavorite}
         />
@@ -38,8 +36,15 @@ function App() {
     </Switch>
   )
 
+  // Click on Details in any component and
+  // this function gets called with the id of the podcast you clicked
   function handleClickDetails(id) {
+    // this function receives the id and sets the state of the detailed
+    // podcast to the podcast you clicked
     setDetailedPodcast(podcasts.find(podcast => podcast.id === id))
+
+    // this function checks, if the podcast you clicked is in the favoritePodcasts array to
+    // it alters the functionality of the add to favorite/remove from favorite button
     setIsFavorite(favoritePodcasts.some(podcast => podcast.id === id))
     push('/details')
   }
@@ -66,10 +71,6 @@ function App() {
 
   function handleClickFavoritesPage() {
     push('/favorites')
-  }
-
-  function handleClickBack() {
-    goBack()
   }
 }
 

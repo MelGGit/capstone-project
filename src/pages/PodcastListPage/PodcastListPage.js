@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro'
 import PodcastCard from '../../components/PodcastCard/PodcastCard'
 import PropTypes from 'prop-types'
+import { PageContainer } from '../../components/PageContainer/PageContainer'
 
 PodcastListPage.propTypes = {
   podcasts: PropTypes.array.isRequired,
@@ -14,7 +15,7 @@ export default function PodcastListPage({
   onClickFavorites,
 }) {
   return (
-    <PageContainer>
+    <PageWrapper>
       <button onClick={onClickFavorites}>favorites</button>
       {podcasts.map(({ image, title, id, author }) => (
         <PodcastCard
@@ -26,12 +27,11 @@ export default function PodcastListPage({
           onClickDetails={onClickDetails}
         />
       ))}
-    </PageContainer>
+    </PageWrapper>
   )
 }
 
-const PageContainer = styled.section`
-  margin: 2rem 0;
+const PageWrapper = styled(PageContainer)`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;

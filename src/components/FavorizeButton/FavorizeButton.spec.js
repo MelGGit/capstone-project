@@ -8,7 +8,7 @@ describe('FavorizeButton', () => {
       <FavorizeButton isFavorite={false} onToggleFavorite={jest.fn} id={1} />
     )
     expect(screen.getByText('Add to Favorites')).toBeInTheDocument()
-    expect(screen.getByTestId('svg')).toBeInTheDocument()
+    expect(screen.getByTitle('Star')).toBeInTheDocument()
   })
   it('should invoke onToggleFavorites with id as argument', () => {
     const favorize = jest.fn()

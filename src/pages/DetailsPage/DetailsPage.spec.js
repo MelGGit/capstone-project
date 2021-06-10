@@ -57,8 +57,9 @@ describe('DetailsPage', () => {
       />
     )
 
-    const back = screen.getByTestId('back')
-    userEvent.click(back)
+    const allButtons = screen.getAllByRole('button')
+    const backButton = allButtons[0]
+    userEvent.click(backButton)
     expect(onClickDetailsBack).toHaveBeenCalled()
   })
   it('should call onToggleFavorites with argument id', () => {

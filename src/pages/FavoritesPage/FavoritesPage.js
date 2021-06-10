@@ -1,14 +1,12 @@
 import styled from 'styled-components/macro'
+import BackButton from '../../components/BackButton/BackButton'
+import { PageContainer } from '../../components/PageContainer/PageContainer'
 import PodcastCard from '../../components/PodcastCard/PodcastCard'
 
-export default function FavoritesPage({
-  favoritePodcasts,
-  onClickDetails,
-  onClickBackFavorites,
-}) {
+export default function FavoritesPage({ favoritePodcasts, onClickDetails }) {
   return (
-    <PageContainer>
-      <button onClick={onClickBackFavorites}>Back</button>
+    <PageWrapper>
+      <BackButton />
       {favoritePodcasts.map(({ image, title, id, author }) => (
         <PodcastCard
           key={id}
@@ -19,12 +17,11 @@ export default function FavoritesPage({
           onClickDetails={onClickDetails}
         />
       ))}
-    </PageContainer>
+    </PageWrapper>
   )
 }
 
-const PageContainer = styled.section`
-  margin: 2rem 0;
+const PageWrapper = styled(PageContainer)`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
