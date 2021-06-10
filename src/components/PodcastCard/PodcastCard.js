@@ -1,25 +1,21 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
 import LazyLoad from 'react-lazyload'
+import { useSetRecoilState } from 'recoil'
+import { detailedPodcastState } from '../../states'
+import { useHistory } from 'react-router'
 
 PodcastCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  id: PropTypes.number.isRequired,
-  onClickDetails: PropTypes.func.isRequired,
+  podcast: PropTypes.object.isRequired,
 }
 
-export default function PodcastCard({
-  image,
-  title,
-  author,
-  id,
-  onClickDetails,
-}) {
+export default function PodcastCard({ podcast }) {
+  const { image, title, author } = podcast
+  const { push } = useHistory()
+  const setDetailedPodcast = useSetRecoilState(detailedPodcastState)
   return (
     <LazyLoad height={48} offset={96}>
-      <Card data-testid="card" onClick={() => onClickDetails(id)}>
+      <Card data-testid="card" onClick={handleClick}>
         <ImageContainer>
           <Image src={image} alt={`Podcast `} width="150px" height="150px" />
         </ImageContainer>
@@ -39,6 +35,11 @@ export default function PodcastCard({
       </Card>
     </LazyLoad>
   )
+
+  function handleClick() {
+    setDetailedPodcast(podcast)
+    push('/details')
+  }
 }
 
 const Card = styled.section`

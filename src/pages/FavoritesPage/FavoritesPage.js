@@ -1,21 +1,18 @@
+import { useRecoilValue } from 'recoil'
 import styled from 'styled-components/macro'
 import BackButton from '../../components/BackButton/BackButton'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
 import PodcastCard from '../../components/PodcastCard/PodcastCard'
+import { favoritePodcastsState } from '../../states'
 
-export default function FavoritesPage({ favoritePodcasts, onClickDetails }) {
+export default function FavoritesPage() {
+  const favoritePodcasts = useRecoilValue(favoritePodcastsState)
+
   return (
     <PageWrapper>
       <BackButton />
-      {favoritePodcasts.map(({ image, title, id, author }) => (
-        <PodcastCard
-          key={id}
-          image={image}
-          title={title}
-          author={author}
-          id={id}
-          onClickDetails={onClickDetails}
-        />
+      {favoritePodcasts.map(podcast => (
+        <PodcastCard key={podcast.id} podcast={podcast} />
       ))}
     </PageWrapper>
   )

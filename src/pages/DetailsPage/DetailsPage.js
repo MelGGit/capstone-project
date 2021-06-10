@@ -1,17 +1,14 @@
 import styled from 'styled-components/macro'
-import PropTypes from 'prop-types'
 import FavorizeButton from '../../components/FavorizeButton/FavorizeButton'
 import BackButton from '../../components/BackButton/BackButton'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
+import { useRecoilValue } from 'recoil'
+import { detailedPodcastState } from '../../states'
 
-DetailsPage.propTypes = {
-  podcast: PropTypes.object,
-  onToggleFavorite: PropTypes.func.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-}
+export default function DetailsPage() {
+  const detailedPodcast = useRecoilValue(detailedPodcastState)
+  const { image, title, author, description, categories } = detailedPodcast
 
-export default function DetailsPage({ podcast, onToggleFavorite, isFavorite }) {
-  const { image, title, id, author, description, categories } = podcast
   return (
     <PageContainer>
       <BackButton />
@@ -31,11 +28,7 @@ export default function DetailsPage({ podcast, onToggleFavorite, isFavorite }) {
         </InnerContainer>
       </HeaderContainer>
       <BodyContainer>
-        <FavorizeButton
-          id={id}
-          onToggleFavorite={onToggleFavorite}
-          isFavorite={isFavorite}
-        />
+        <FavorizeButton id={detailedPodcast?.id || 1} />
         <Text>{description}</Text>
         {categories && (
           <TagList>
@@ -58,7 +51,6 @@ const HeaderContainer = styled.div`
 const BodyContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   gap: 1rem;
   margin-top: 2rem;
 `
@@ -108,7 +100,7 @@ const Tag = styled.li`
   list-style: none;
   font-weight: bold;
   font-size: 0.875rem;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.5rem;
   border-radius: 10px;
   margin: 0 0.25rem 0.25rem 0;
   display: list-item;

@@ -1,21 +1,28 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
+import { useRecoilState } from 'recoil'
+import { favoritePodcastsState } from '../../states'
+import podcasts from '../../test_data_space.json'
 
 FavorizeButton.propTypes = {
-  isFavorite: PropTypes.bool.isRequired,
-  onToggleFavorite: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
 }
 
-export default function FavorizeButton({ isFavorite, onToggleFavorite, id }) {
+export default function FavorizeButton({ id }) {
+  const [favoritePodcasts, setFavoritePodcasts] = useRecoilState(
+    favoritePodcastsState
+  )
+
+  const isFavorite = favoritePodcasts.some(podcast => podcast.id === id)
+
   return (
-    <Button data-testid="favorize-button" onClick={() => onToggleFavorite(id)}>
+    <Button data-testid="favorize-button" onClick={handleClick}>
       <SVG
         isFavorite={isFavorite}
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        width="auto"
-        height="auto"
+        width="24"
+        height="100%"
         viewBox="0 0 24 24"
       >
         <title>Star</title>
@@ -24,6 +31,23 @@ export default function FavorizeButton({ isFavorite, onToggleFavorite, id }) {
       {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
     </Button>
   )
+
+  function handleClick() {
+    const index = favoritePodcasts.findIndex(podcast => podcast.id === id)
+    if (!isFavorite) addPodcast()
+    if (isFavorite) removePodcast(index)
+  }
+
+  function addPodcast() {
+    setFavoritePodcasts([
+      podcasts.find(podcast => podcast.id === id),
+      ...favoritePodcasts,
+    ])
+  }
+
+  function removePodcast() {
+    setFavoritePodcasts(favoritePodcasts.filter(podcast => podcast.id !== id))
+  }
 }
 
 const Button = styled.button`
@@ -33,6 +57,7 @@ const Button = styled.button`
   background: none;
   border: none;
   color: inherit;
+  justify-content: flex-start;
   align-items: center;
   gap: 1rem;
   font-weight: bold;
@@ -46,5 +71,4 @@ const Button = styled.button`
 
 const SVG = styled.svg`
   fill: ${props => (props.isFavorite ? '#fff209' : 'var(--darker-grey)')};
-  height: inherit;
 `
