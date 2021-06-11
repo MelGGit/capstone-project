@@ -7,8 +7,6 @@ import FavoritesPage from './pages/FavoritesPage/FavoritesPage'
 import Navigation from './components/Navigation/Navigation'
 
 export default function App() {
-  const { push } = useHistory()
-
   return (
     <AppContainer>
       <Switch>
