@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import PodcastListPage from './pages/PodcastListPage/PodcastListPage'
-import { Route, Switch, useHistory } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import DetailsPage from './pages/DetailsPage/DetailsPage'
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage'
 import Navigation from './components/Navigation/Navigation'
