@@ -13,27 +13,28 @@ export default function PodcastCard({ podcast }) {
   const { image, title, author } = podcast
   const { push } = useHistory()
   const setDetailedPodcast = useSetRecoilState(detailedPodcastState)
+
   return (
-    <LazyLoad height={48} offset={96}>
-      <Card data-testid="card" onClick={handleClick}>
+    <Card data-testid="card" onClick={handleClick}>
+      <LazyLoad height={48} offset={96} overflow={true} debounce once>
         <ImageContainer>
-          <Image src={image} alt={`Podcast `} width="150px" height="150px" />
+          <Image src={image} alt={'Poster'} width="48px" height="48px" />
         </ImageContainer>
-        <InnerLayoutContainer>
-          <Title>{title}</Title>
-          <Author>{author}</Author>
-        </InnerLayoutContainer>
-        <SVG
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-          width="100%"
-          height="100%"
-          viewBox="0 0 20 20"
-        >
-          <path d="M10 12c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 6c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 18c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0z"></path>
-        </SVG>
-      </Card>
-    </LazyLoad>
+      </LazyLoad>
+      <InnerLayoutContainer>
+        <Title>{title}</Title>
+        <Author>{author}</Author>
+      </InnerLayoutContainer>
+      <SVG
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="100%"
+        viewBox="0 0 20 20"
+      >
+        <path d="M10 12c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 6c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 18c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0z"></path>
+      </SVG>
+    </Card>
   )
 
   function handleClick() {
@@ -69,6 +70,11 @@ const InnerLayoutContainer = styled.div`
 const Image = styled.img`
   height: 3rem;
   width: 3rem;
+  font-size: 0;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 `
 const Author = styled.h3`
   font-size: 0.8rem;
