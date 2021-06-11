@@ -4,6 +4,7 @@ import LazyLoad from 'react-lazyload'
 import { useSetRecoilState } from 'recoil'
 import { detailedPodcastState } from '../../states'
 import { useHistory } from 'react-router'
+import { ReactComponent as Dots } from '../../assets/dots-horizontal-triple.svg'
 
 PodcastCard.propTypes = {
   podcast: PropTypes.object.isRequired,
@@ -25,15 +26,7 @@ export default function PodcastCard({ podcast }) {
         <Title>{title}</Title>
         <Author>{author}</Author>
       </InnerLayoutContainer>
-      <SVG
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        width="100%"
-        height="100%"
-        viewBox="0 0 20 20"
-      >
-        <path d="M10 12c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 6c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0zM10 18c-1.105 0-2-0.895-2-2s0.895-2 2-2v0c1.105 0 2 0.895 2 2s-0.895 2-2 2v0z"></path>
-      </SVG>
+      <SVG />
     </Card>
   )
 
@@ -94,6 +87,7 @@ const Title = styled.h2`
   text-overflow: ellipsis;
   max-width: 90%;
 `
-const SVG = styled.svg`
+const SVG = styled(Dots)`
   fill: var(--darker-grey);
+  align-self: center;
 `

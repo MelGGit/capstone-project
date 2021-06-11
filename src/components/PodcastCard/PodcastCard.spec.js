@@ -7,7 +7,8 @@ import { Router } from 'react-router-dom'
 
 describe('PodcastCard', () => {
   it('renders an image and title', () => {
-    const historyMock = { push: jest.fn(), location: {}, listen: jest.fn() }
+    const noop = () => {}
+    const historyMock = { push: noop, location: noop, listen: noop }
 
     render(
       <Router history={historyMock}>

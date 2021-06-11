@@ -3,24 +3,21 @@ import { Search, Star } from 'react-feather'
 import { NavLink } from 'react-router-dom'
 
 export default function Navigation() {
+  const activeStyle = {
+    color: 'var(--white)',
+    scale: '1.05',
+  }
   return (
     <Nav>
       <NavItems>
-        <StyledNavLink
-          exact
-          to="/"
-          activeStyle={{ color: 'var(--white)', scale: '1.05' }}
-        >
+        <StyledNavLink exact to="/" activeStyle={{ activeStyle }}>
           <NavIcon>
             <Search size={24} />
           </NavIcon>
           Search
         </StyledNavLink>
 
-        <StyledNavLink
-          to="/favorites"
-          activeStyle={{ color: 'var(--white)', scale: '1.05' }}
-        >
+        <StyledNavLink to="/favorites" activeStyle={{ activeStyle }}>
           <NavIcon>
             <Star size={24} />
           </NavIcon>

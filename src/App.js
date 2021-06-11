@@ -28,5 +28,5 @@ export default function App() {
 const AppContainer = styled.section`
   height: 100vh;
   display: grid;
-  grid-template-rows: 1fr 48px;
+  grid-template-rows: 1fr 3rem;
 `
