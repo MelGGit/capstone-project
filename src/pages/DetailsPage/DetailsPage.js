@@ -6,21 +6,21 @@ import { useParams } from 'react-router'
 import { useRecoilState, useResetRecoilState } from 'recoil'
 import { detailedPodcastState } from '../../states'
 import podcasts from '../../test_data_space.json'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import LoadingScreen from '../../components/Loading Screen/LoadingScreen'
 
 export default function DetailsPage() {
   const { id } = useParams()
   const [podcastDetails, setPodcastDetails] = useRecoilState(
     detailedPodcastState
   )
+  const [isLoading, setIsLoading] = useState(true)
+
   const reset = useResetRecoilState(detailedPodcastState)
 
   useEffect(() => {
     setPodcastDetails(podcasts.find(podcast => podcast.id === Number(id)))
-
-    return () => {
-      reset()
-    }
+    setTimeout(() => setIsLoading(false), 400)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
@@ -29,28 +29,32 @@ export default function DetailsPage() {
   return (
     <PageContainer>
       <BackButton />
-      <ContentWrapper>
-        <HeaderContainer>
-          <ImageContainer>
-            <Image src={image} alt={`Poster`} width="40px" height="40px" />
-          </ImageContainer>
-          <InnerContainer>
-            <Title>{title}</Title>
-            <Author>{author}</Author>
-          </InnerContainer>
-        </HeaderContainer>
-        <BodyContainer>
-          <FavorizeButton id={Number(id)} />
-          <Text>{description}</Text>
-          {categories && (
-            <TagList>
-              {Object.entries(categories).map(([key, value]) => (
-                <Tag key={key}>{value}</Tag>
-              ))}
-            </TagList>
-          )}
-        </BodyContainer>
-      </ContentWrapper>
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <ContentWrapper>
+          <HeaderContainer>
+            <ImageContainer>
+              <Image src={image} alt={`Poster`} width="40px" height="40px" />
+            </ImageContainer>
+            <InnerContainer>
+              <Title>{title}</Title>
+              <Author>{author}</Author>
+            </InnerContainer>
+          </HeaderContainer>
+          <BodyContainer>
+            <FavorizeButton id={Number(id)} />
+            <Text>{description}</Text>
+            {categories && (
+              <TagList>
+                {Object.entries(categories).map(([key, value]) => (
+                  <Tag key={key}>{value}</Tag>
+                ))}
+              </TagList>
+            )}
+          </BodyContainer>
+        </ContentWrapper>
+      )}
     </PageContainer>
   )
 }
