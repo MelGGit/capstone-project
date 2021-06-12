@@ -3,7 +3,7 @@ import FavorizeButton from '../../components/FavorizeButton/FavorizeButton'
 import BackButton from '../../components/BackButton/BackButton'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
 import { useParams } from 'react-router'
-import { useRecoilState, useResetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { detailedPodcastState } from '../../states'
 import podcasts from '../../test_data_space.json'
 import { useEffect, useState } from 'react'
@@ -15,8 +15,6 @@ export default function DetailsPage() {
     detailedPodcastState
   )
   const [isLoading, setIsLoading] = useState(true)
-
-  const reset = useResetRecoilState(detailedPodcastState)
 
   useEffect(() => {
     setPodcastDetails(podcasts.find(podcast => podcast.id === Number(id)))
