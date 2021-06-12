@@ -1,28 +1,28 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { RecoilRoot } from 'recoil'
 import DetailsPage from './DetailsPage'
 
 describe('DetailsPage', () => {
   it('renders a page with details', () => {
     render(
-      <DetailsPage
-        podcast={{
-          id: 1,
-          title: 'Murder On The Space Coast',
-          image: 'image1',
-          author: 'author1',
-          description: 'This is a long description',
-          categories: {
-            26: 'Fiction',
-            67: 'Science',
-            1: 'Arts',
-            7: 'Performing',
-          },
-        }}
-        onClickDetailsBack={jest.fn()}
-        onToggleFavorite={jest.fn()}
-        isFavorite={false}
-      />
+      <RecoilRoot>
+        <DetailsPage
+          podcast={{
+            id: 1,
+            title: 'Murder On The Space Coast',
+            image: 'image1',
+            author: 'author1',
+            description: 'This is a long description',
+            categories: {
+              26: 'Fiction',
+              67: 'Science',
+              1: 'Arts',
+              7: 'Performing',
+            },
+          }}
+        />
+      </RecoilRoot>
     )
     const list = screen.getAllByRole('listitem')
     const listLength = list.length

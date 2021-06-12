@@ -2,67 +2,90 @@ import styled from 'styled-components/macro'
 import FavorizeButton from '../../components/FavorizeButton/FavorizeButton'
 import BackButton from '../../components/BackButton/BackButton'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
-import { useRecoilValue } from 'recoil'
+import { useParams } from 'react-router'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 import { detailedPodcastState } from '../../states'
+import podcasts from '../../test_data_space.json'
+import { useEffect } from 'react'
 
 export default function DetailsPage() {
-  const detailedPodcast = useRecoilValue(detailedPodcastState)
-  const { image, title, author, description, categories } = detailedPodcast
+  const { id } = useParams()
+  const [podcastDetails, setPodcastDetails] = useRecoilState(
+    detailedPodcastState
+  )
+  const reset = useResetRecoilState(detailedPodcastState)
+
+  useEffect(() => {
+    setPodcastDetails(podcasts.find(podcast => podcast.id === Number(id)))
+
+    return () => {
+      reset()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id])
+
+  const { image, title, author, description, categories } = podcastDetails
 
   return (
     <PageContainer>
       <BackButton />
-      <HeaderContainer>
-        <ImageContainer>
-          <Image
-            src={image}
-            alt={`Podcast `}
-            width="400px"
-            height="400px"
-            loading="lazy"
-          />
-        </ImageContainer>
-        <InnerContainer>
-          <Title>{title}</Title>
-          <Author>{author}</Author>
-        </InnerContainer>
-      </HeaderContainer>
-      <BodyContainer>
-        <FavorizeButton id={detailedPodcast?.id || 1} />
-        <Text>{description}</Text>
-        {categories && (
-          <TagList>
-            {Object.entries(categories).map(([key, value]) => (
-              <Tag key={key}>{value}</Tag>
-            ))}
-          </TagList>
-        )}
-      </BodyContainer>
+      <ContentWrapper>
+        <HeaderContainer>
+          <ImageContainer>
+            <Image src={image} alt={`Poster`} width="40px" height="40px" />
+          </ImageContainer>
+          <InnerContainer>
+            <Title>{title}</Title>
+            <Author>{author}</Author>
+          </InnerContainer>
+        </HeaderContainer>
+        <BodyContainer>
+          <FavorizeButton id={Number(id)} />
+          <Text>{description}</Text>
+          {categories && (
+            <TagList>
+              {Object.entries(categories).map(([key, value]) => (
+                <Tag key={key}>{value}</Tag>
+              ))}
+            </TagList>
+          )}
+        </BodyContainer>
+      </ContentWrapper>
     </PageContainer>
   )
 }
 
-const HeaderContainer = styled.div`
+const ContentWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  width: 100%;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+`
+const HeaderContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
   margin-top: 2rem;
+  width: min(100%, 40.7rem);
 `
 const BodyContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin-top: 2rem;
+  width: min(100%, 40.7rem);
 `
 const InnerContainer = styled.div`
   display: flex;
-  width: 50%;
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
 `
 const ImageContainer = styled.div`
-  width: 50%;
+  height: auto;
+  width: 100%;
+  display: block;
 `
 
 const Image = styled.img`
