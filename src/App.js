@@ -16,7 +16,7 @@ export default function App() {
         <Route path="/favorites">
           <FavoritesPage />
         </Route>
-        <Route path="/details">
+        <Route exact path="/podcast/:id">
           <DetailsPage />
         </Route>
       </Switch>

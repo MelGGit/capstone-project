@@ -10,14 +10,14 @@ export default function Navigation() {
   return (
     <Nav>
       <NavItems>
-        <StyledNavLink exact to="/" activeStyle={{ activeStyle }}>
+        <StyledNavLink exact to="/" activeStyle={activeStyle}>
           <NavIcon>
             <Search size={24} />
           </NavIcon>
           Search
         </StyledNavLink>
 
-        <StyledNavLink to="/favorites" activeStyle={{ activeStyle }}>
+        <StyledNavLink to="/favorites" activeStyle={activeStyle}>
           <NavIcon>
             <Star size={24} />
           </NavIcon>

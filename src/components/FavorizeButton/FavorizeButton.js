@@ -17,8 +17,8 @@ export default function FavorizeButton({ id }) {
   const isFavorite = favoritePodcasts.some(podcast => podcast.id === id)
 
   return (
-    <Button data-testid="favorize-button" onClick={handleClick}>
-      <SVG isFavorite={isFavorite} />
+    <Button onClick={handleClick}>
+      <SVG fill={isFavorite ? '#fff209' : 'var(--darker-grey)'} />
       {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
     </Button>
   )
@@ -60,6 +60,4 @@ const Button = styled.button`
   }
 `
 
-const SVG = styled(Star)`
-  fill: ${props => (props.isFavorite ? '#fff209' : 'var(--darker-grey)')};
-`
+const SVG = styled(Star)``
