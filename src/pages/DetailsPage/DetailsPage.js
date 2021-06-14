@@ -39,7 +39,9 @@ export default function DetailsPage() {
             <Title>{title}</Title>
             <Author>{author}</Author>
           </InnerContainer>
-          <FavorizeButton id={Number(id)} />
+          <FavorizeContainer>
+            <FavorizeButton id={Number(id)} />
+          </FavorizeContainer>
           <Text>{description}</Text>
           {categories && (
             <TagList>
@@ -61,6 +63,10 @@ const ContentWrapper = styled.div`
   grid-template-rows: repeat(4, min-content);
   gap: 1rem;
   width: min(100%, 40.7rem);
+`
+
+const FavorizeContainer = styled.div`
+  grid-column: span 2;
 `
 
 const InnerContainer = styled.div`
