@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro'
 import BounceLoader from 'react-spinners/BounceLoader'
 
-export default function LoadingScreen() {
+export default function LoadingSpinner() {
   return (
     <Wrapper>
       <BounceLoader color={'var(--darker-grey)'} />

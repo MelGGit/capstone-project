@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil'
 import { detailedPodcastState } from '../../states'
 import podcasts from '../../test_data_space.json'
 import { useEffect, useState } from 'react'
-import LoadingScreen from '../../components/Loading Screen/LoadingScreen'
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
 export default function DetailsPage() {
   const { id } = useParams()
@@ -17,6 +17,7 @@ export default function DetailsPage() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    setIsLoading(true)
     setPodcastDetails(podcasts.find(podcast => podcast.id === Number(id)))
     setTimeout(() => setIsLoading(false), 400)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,7 +29,7 @@ export default function DetailsPage() {
     <PageWrapper>
       <BackButton />
       {isLoading ? (
-        <LoadingScreen />
+        <LoadingSpinner />
       ) : (
         <ContentWrapper>
           <ImageContainer>
@@ -58,11 +59,6 @@ const ContentWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(4, min-content);
-  grid-template-areas:
-    'Image Header'
-    'Favorites Favorites'
-    'Description Description'
-    'Tags Tags';
   gap: 1rem;
   width: min(100%, 40.7rem);
 `
@@ -72,13 +68,11 @@ const InnerContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
-  grid-area: Header;
 `
 const ImageContainer = styled.div`
   height: auto;
   width: 100%;
   display: block;
-  grid-area: Image;
 `
 
 const Image = styled.img`
@@ -102,7 +96,7 @@ const Author = styled.h3`
 const Text = styled.p`
   font-weight: 100;
   font-size: 0.8rem;
-  grid-area: Description;
+  grid-column: span 2;
 `
 const TagList = styled.ul`
   margin-top: 1rem;
@@ -110,7 +104,7 @@ const TagList = styled.ul`
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  grid-area: Tags;
+  grid-column: span 2;
 `
 
 const Tag = styled.li`
