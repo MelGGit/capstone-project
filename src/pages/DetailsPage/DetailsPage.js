@@ -3,34 +3,35 @@ import FavorizeButton from '../../components/FavorizeButton/FavorizeButton'
 import BackButton from '../../components/BackButton/BackButton'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
 import { useParams } from 'react-router'
-import { useRecoilState, useResetRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { detailedPodcastState } from '../../states'
 import podcasts from '../../test_data_space.json'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
 export default function DetailsPage() {
   const { id } = useParams()
   const [podcastDetails, setPodcastDetails] = useRecoilState(
     detailedPodcastState
   )
-  const reset = useResetRecoilState(detailedPodcastState)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    setIsLoading(true)
     setPodcastDetails(podcasts.find(podcast => podcast.id === Number(id)))
-
-    return () => {
-      reset()
-    }
+    setTimeout(() => setIsLoading(false), 400)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   const { image, title, author, description, categories } = podcastDetails
 
   return (
-    <PageContainer>
+    <PageWrapper>
       <BackButton />
-      <ContentWrapper>
-        <HeaderContainer>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <ContentWrapper>
           <ImageContainer>
             <Image src={image} alt={`Poster`} width="40px" height="40px" />
           </ImageContainer>
@@ -38,8 +39,6 @@ export default function DetailsPage() {
             <Title>{title}</Title>
             <Author>{author}</Author>
           </InnerContainer>
-        </HeaderContainer>
-        <BodyContainer>
           <FavorizeButton id={Number(id)} />
           <Text>{description}</Text>
           {categories && (
@@ -49,33 +48,21 @@ export default function DetailsPage() {
               ))}
             </TagList>
           )}
-        </BodyContainer>
-      </ContentWrapper>
-    </PageContainer>
+        </ContentWrapper>
+      )}
+    </PageWrapper>
   )
 }
+const PageWrapper = styled(PageContainer)``
 
 const ContentWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-`
-const HeaderContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 2rem;
-  width: min(100%, 40.7rem);
-`
-const BodyContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  grid-template-rows: repeat(4, min-content);
   gap: 1rem;
   width: min(100%, 40.7rem);
 `
+
 const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -109,6 +96,7 @@ const Author = styled.h3`
 const Text = styled.p`
   font-weight: 100;
   font-size: 0.8rem;
+  grid-column: span 2;
 `
 const TagList = styled.ul`
   margin-top: 1rem;
@@ -116,6 +104,7 @@ const TagList = styled.ul`
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
+  grid-column: span 2;
 `
 
 const Tag = styled.li`

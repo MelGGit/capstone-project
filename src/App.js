@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom'
 import DetailsPage from './pages/DetailsPage/DetailsPage'
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage'
 import Navigation from './components/Navigation/Navigation'
+import Div100vh from 'react-div-100vh'
 
 export default function App() {
   return (
@@ -25,8 +26,7 @@ export default function App() {
   )
 }
 
-const AppContainer = styled.section`
-  height: 100vh;
+const AppContainer = styled(Div100vh)`
   display: grid;
   grid-template-rows: 1fr 3rem;
 `
