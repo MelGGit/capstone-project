@@ -25,69 +25,60 @@ export default function DetailsPage() {
   const { image, title, author, description, categories } = podcastDetails
 
   return (
-    <PageContainer>
+    <PageWrapper>
       <BackButton />
       {isLoading ? (
         <LoadingScreen />
       ) : (
         <ContentWrapper>
-          <HeaderContainer>
-            <ImageContainer>
-              <Image src={image} alt={`Poster`} width="40px" height="40px" />
-            </ImageContainer>
-            <InnerContainer>
-              <Title>{title}</Title>
-              <Author>{author}</Author>
-            </InnerContainer>
-          </HeaderContainer>
-          <BodyContainer>
-            <FavorizeButton id={Number(id)} />
-            <Text>{description}</Text>
-            {categories && (
-              <TagList>
-                {Object.entries(categories).map(([key, value]) => (
-                  <Tag key={key}>{value}</Tag>
-                ))}
-              </TagList>
-            )}
-          </BodyContainer>
+          <ImageContainer>
+            <Image src={image} alt={`Poster`} width="40px" height="40px" />
+          </ImageContainer>
+          <InnerContainer>
+            <Title>{title}</Title>
+            <Author>{author}</Author>
+          </InnerContainer>
+          <FavorizeButton id={Number(id)} />
+          <Text>{description}</Text>
+          {categories && (
+            <TagList>
+              {Object.entries(categories).map(([key, value]) => (
+                <Tag key={key}>{value}</Tag>
+              ))}
+            </TagList>
+          )}
         </ContentWrapper>
       )}
-    </PageContainer>
+    </PageWrapper>
   )
 }
+const PageWrapper = styled(PageContainer)``
 
 const ContentWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-`
-const HeaderContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, min-content);
+  grid-template-areas:
+    'Image Header'
+    'Favorites Favorites'
+    'Description Description'
+    'Tags Tags';
   gap: 1rem;
-  margin-top: 2rem;
   width: min(100%, 40.7rem);
 `
-const BodyContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: min(100%, 40.7rem);
-`
+
 const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
+  grid-area: Header;
 `
 const ImageContainer = styled.div`
   height: auto;
   width: 100%;
   display: block;
+  grid-area: Image;
 `
 
 const Image = styled.img`
@@ -111,6 +102,7 @@ const Author = styled.h3`
 const Text = styled.p`
   font-weight: 100;
   font-size: 0.8rem;
+  grid-area: Description;
 `
 const TagList = styled.ul`
   margin-top: 1rem;
@@ -118,6 +110,7 @@ const TagList = styled.ul`
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
+  grid-area: Tags;
 `
 
 const Tag = styled.li`
