@@ -1,8 +1,7 @@
 import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import { useRecoilState } from 'recoil'
-import { favoritePodcastsState } from '../../states'
-import podcasts from '../../test_data_space.json'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { favoritePodcastsState, searchedPodcastsState } from '../../states'
 import { ReactComponent as Star } from '../../assets/star.svg'
 
 FavorizeButton.propTypes = {
@@ -13,6 +12,7 @@ export default function FavorizeButton({ id }) {
   const [favoritePodcasts, setFavoritePodcasts] = useRecoilState(
     favoritePodcastsState
   )
+  const searchedPodcasts = useRecoilValue(searchedPodcastsState)
 
   const isFavorite = favoritePodcasts.some(podcast => podcast.id === id)
 
@@ -31,7 +31,7 @@ export default function FavorizeButton({ id }) {
 
   function addPodcast() {
     setFavoritePodcasts([
-      podcasts.find(podcast => podcast.id === id),
+      searchedPodcasts.find(podcast => podcast.id === id),
       ...favoritePodcasts,
     ])
   }
