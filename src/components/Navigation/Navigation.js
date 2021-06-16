@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro'
-import { Search, Star } from 'react-feather'
+import { Search, Star, Home } from 'react-feather'
 import { NavLink } from 'react-router-dom'
 
 export default function Navigation() {
@@ -11,6 +11,12 @@ export default function Navigation() {
     <Nav>
       <NavItems>
         <StyledNavLink exact to="/" activeStyle={activeStyle}>
+          <NavIcon>
+            <Home size={24} />
+          </NavIcon>
+          Start
+        </StyledNavLink>
+        <StyledNavLink to="/search" activeStyle={activeStyle}>
           <NavIcon>
             <Search size={24} />
           </NavIcon>

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useSetRecoilState } from 'recoil'
-import { searchedPodcastsByTermState } from '../states'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { currentSearchTermState, searchedPodcastsByTermState } from '../states'
 
 export default function useApi() {
   // is used to track query call If it is true a loading screen is shown
@@ -8,11 +8,12 @@ export default function useApi() {
   const setSearchedPodcastsByTerm = useSetRecoilState(
     searchedPodcastsByTermState
   )
+  const currentSearchTerm = useRecoilValue(currentSearchTermState)
 
   // search a podcast with a specific term
   async function searchPodcastsByTerm() {
     setIsQuerying(true)
-    const res = await fetch('/api/byTerm/deutschlandfunk')
+    const res = await fetch('/api/byTerm/' + currentSearchTerm)
     const resData = await res.json()
     setIsQuerying(false)
     // updates the searched podcasts in he global state
