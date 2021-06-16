@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import React from 'react'
 import { mount } from '@cypress/react'
-import FavorizeButton from './FavorizeButton'
+import FavorizeButton from '../components/FavorizeButton/FavorizeButton'
 import { RecoilRoot } from 'recoil'
 
 it('renders a text', () => {
