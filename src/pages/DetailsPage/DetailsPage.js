@@ -4,7 +4,7 @@ import BackButton from '../../components/BackButton/BackButton'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
 import { useParams } from 'react-router'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { detailedPodcastState, searchedPodcastsState } from '../../states'
+import { detailedPodcastState, searchedPodcastsByTermState } from '../../states'
 import { useEffect, useState } from 'react'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
@@ -13,13 +13,13 @@ export default function DetailsPage() {
   const [podcastDetails, setPodcastDetails] = useRecoilState(
     detailedPodcastState
   )
-  const searchedPodcasts = useRecoilValue(searchedPodcastsState)
+  const searchedPodcastsByTerm = useRecoilValue(searchedPodcastsByTermState)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     setIsLoading(true)
     setPodcastDetails(
-      searchedPodcasts.find(podcast => podcast.id === Number(id))
+      searchedPodcastsByTerm.find(podcast => podcast.id === Number(id))
     )
     setTimeout(() => setIsLoading(false), 400)
     // eslint-disable-next-line react-hooks/exhaustive-deps

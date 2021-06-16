@@ -1,7 +1,7 @@
 import { atom } from 'recoil'
 
-export const searchedPodcastsState = atom({
-  key: 'searchedPodcasts',
+export const searchedPodcastsByTermState = atom({
+  key: 'searchedPodcastsByTerm',
   default: [],
 })
 

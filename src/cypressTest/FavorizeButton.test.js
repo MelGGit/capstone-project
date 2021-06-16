@@ -4,11 +4,15 @@ import React from 'react'
 import { mount } from '@cypress/react'
 import FavorizeButton from '../components/FavorizeButton/FavorizeButton'
 import { RecoilRoot } from 'recoil'
+import { searchedPodcastsByTermState } from '../states'
 
 it('renders a text', () => {
+  const initializeState = ({ set }) => {
+    set(searchedPodcastsByTermState, [{ id: 1 }, { id: 2 }])
+  }
   mount(
-    <RecoilRoot>
-      <FavorizeButton id={666} />
+    <RecoilRoot initializeState={initializeState}>
+      <FavorizeButton id={1} />
     </RecoilRoot>
   )
 
