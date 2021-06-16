@@ -16,21 +16,6 @@ export default function PodcastListPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // const [isLoading, setisLoading] = useState(true)
-
-  // useEffect(() => {
-  //   setisLoading(true)
-  //   async function getData() {
-  //     const response = await fetch('/api/byTerm/deutschlandfunk')
-  //     const responseBody = await response.json()
-  //     setSearchedPodcasts(responseBody.feeds)
-  //     setisLoading(false)
-  //   }
-  //   getData()
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
-  console.log(searchedPodcastsByTerm)
-
   return (
     <PageWrapper>
       {isQuerying ? (
