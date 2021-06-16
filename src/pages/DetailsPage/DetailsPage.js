@@ -3,9 +3,8 @@ import FavorizeButton from '../../components/FavorizeButton/FavorizeButton'
 import BackButton from '../../components/BackButton/BackButton'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
 import { useParams } from 'react-router'
-import { useRecoilState } from 'recoil'
-import { detailedPodcastState } from '../../states'
-import podcasts from '../../test_data_space.json'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { detailedPodcastState, searchedPodcastsState } from '../../states'
 import { useEffect, useState } from 'react'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 
@@ -14,11 +13,14 @@ export default function DetailsPage() {
   const [podcastDetails, setPodcastDetails] = useRecoilState(
     detailedPodcastState
   )
+  const searchedPodcasts = useRecoilValue(searchedPodcastsState)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     setIsLoading(true)
-    setPodcastDetails(podcasts.find(podcast => podcast.id === Number(id)))
+    setPodcastDetails(
+      searchedPodcasts.find(podcast => podcast.id === Number(id))
+    )
     setTimeout(() => setIsLoading(false), 400)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
