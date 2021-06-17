@@ -8,21 +8,20 @@ import Navigation from './components/Navigation/Navigation'
 import Div100vh from 'react-div-100vh'
 import MainPage from './pages/MainPage/MainPage'
 export default function App() {
+  const routes = [
+    { path: '/', Component: MainPage, exact: true },
+    { path: '/search/:id', Component: PodcastListPage },
+    { path: '/favorites', Component: FavoritesPage },
+    { path: '/podcast/:id', Component: DetailsPage },
+  ]
   return (
     <AppContainer>
       <Switch>
-        <Route exact path="/">
-          <MainPage />
-        </Route>
-        <Route path="/search/:id">
-          <PodcastListPage />
-        </Route>
-        <Route path="/favorites">
-          <FavoritesPage />
-        </Route>
-        <Route exact path="/podcast/:id">
-          <DetailsPage />
-        </Route>
+        {routes.map(({ Component, ...routeProps }) => (
+          <Route key={routeProps.path} {...routeProps}>
+            <Component />
+          </Route>
+        ))}
       </Switch>
       <Navigation />
     </AppContainer>
