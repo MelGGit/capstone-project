@@ -14,7 +14,7 @@ export default function App() {
         <Route exact path="/">
           <MainPage />
         </Route>
-        <Route path="/search">
+        <Route path="/search/:id">
           <PodcastListPage />
         </Route>
         <Route path="/favorites">

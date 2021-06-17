@@ -1,28 +1,23 @@
 import styled from 'styled-components/macro'
 import { Search } from 'react-feather'
-import { useSetRecoilState } from 'recoil'
-import { currentSearchTermState } from '../../states'
+import PropTypes from 'prop-types'
 
-export default function SearchForm() {
-  const setCurrentSearchTerm = useSetRecoilState(currentSearchTermState)
+SearchForm.propTypes = {
+  onSubmit: PropTypes.func,
+  placeholder: PropTypes.string,
+}
 
+export default function SearchForm({ onSubmit, placeholder }) {
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={onSubmit}>
       <Wrapper>
         <SearchIconContainer>
           <SearchIcon />
         </SearchIconContainer>
-        <Input name={'search'} placeholder={'Podcasts'} />
+        <Input name={'search'} placeholder={placeholder} />
       </Wrapper>
     </Form>
   )
-
-  function handleSubmit(event) {
-    event.preventDefault()
-    const form = event.target
-    setCurrentSearchTerm(form.elements.search.value)
-    form.reset()
-  }
 }
 
 const Form = styled.form`

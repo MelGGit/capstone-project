@@ -1,30 +1,26 @@
 import styled from 'styled-components/macro'
 import PodcastCard from '../../components/PodcastCard/PodcastCard'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
-import { useEffect } from 'react'
-import { useRecoilValue } from 'recoil'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
-import useApi from '../../hooks/useApi'
-import { searchedPodcastsByTermState } from '../../states'
+import { useParams } from 'react-router-dom'
+import useSearchByTerm from '../../hooks/useSearchByTerm'
 
 export default function PodcastListPage() {
-  const searchedPodcastsByTerm = useRecoilValue(searchedPodcastsByTermState)
-  const [isQuerying, api] = useApi()
+  const { id: term } = useParams()
+  const { podcastsByTerm, isQuerying } = useSearchByTerm(term)
 
-  useEffect(() => {
-    api.searchPodcastsByTerm()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  if (isQuerying)
+    return (
+      <PageWrapper>
+        <LoadingSpinner />
+      </PageWrapper>
+    )
 
   return (
     <PageWrapper>
-      {isQuerying ? (
-        <LoadingSpinner />
-      ) : (
-        searchedPodcastsByTerm.map(podcast => (
-          <PodcastCard key={podcast.id} podcast={podcast} />
-        ))
-      )}
+      {podcastsByTerm.feeds.map(podcast => (
+        <PodcastCard key={podcast.id} podcast={podcast} />
+      ))}
     </PageWrapper>
   )
 }
