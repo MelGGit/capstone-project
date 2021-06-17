@@ -1,5 +1,7 @@
 import React from 'react';
 import GlobalStyles from '../src/GlobalStyles';
+import { RecoilRoot } from 'recoil';
+import { MemoryRouter } from 'react-router-dom';
 
 
 export const parameters = {
@@ -16,7 +18,11 @@ export const decorators = [
   (Story) => (
     <>
     <GlobalStyles />
-      <Story />
+      <RecoilRoot>
+          <MemoryRouter initialEntries={['/']}>
+            <Story />
+          </MemoryRouter>
+      </RecoilRoot>
     </>
   ),
 ];

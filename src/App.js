@@ -6,12 +6,15 @@ import DetailsPage from './pages/DetailsPage/DetailsPage'
 import FavoritesPage from './pages/FavoritesPage/FavoritesPage'
 import Navigation from './components/Navigation/Navigation'
 import Div100vh from 'react-div-100vh'
-
+import MainPage from './pages/MainPage/MainPage'
 export default function App() {
   return (
     <AppContainer>
       <Switch>
         <Route exact path="/">
+          <MainPage />
+        </Route>
+        <Route path="/search/:id">
           <PodcastListPage />
         </Route>
         <Route path="/favorites">

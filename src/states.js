@@ -5,6 +5,11 @@ export const searchedPodcastsByTermState = atom({
   default: [],
 })
 
+export const currentSearchTermState = atom({
+  key: 'currentSearchTerm',
+  default: '',
+})
+
 export const favoritePodcastsState = atom({
   key: 'favoritePodcasts',
   default: [],
