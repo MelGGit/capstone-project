@@ -1,28 +1,26 @@
-import styled from 'styled-components/macro'
 import PropTypes from 'prop-types'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import {
-  favoritePodcastsState,
-  searchedPodcastsByTermState,
-} from '../../states'
 import { ReactComponent as Star } from '../../assets/star.svg'
+import { favoritePodcastsState } from '../../states'
+import styled from 'styled-components/macro'
+import { useRecoilState } from 'recoil'
 
 FavorizeButton.propTypes = {
   id: PropTypes.number.isRequired,
+  addText: PropTypes.string,
+  removeText: PropTypes.string,
 }
 
-export default function FavorizeButton({ id }) {
+export default function FavorizeButton({ id, addText, removeText }) {
   const [favoritePodcasts, setFavoritePodcasts] = useRecoilState(
     favoritePodcastsState
   )
-  const searchedPodcastsByTerm = useRecoilValue(searchedPodcastsByTermState)
 
-  const isFavorite = favoritePodcasts.some(podcast => podcast.id === id)
+  const isFavorite = favoritePodcasts.some(favoriteId => favoriteId === id)
 
   return (
     <Button onClick={handleClick}>
       <SVG fill={isFavorite ? '#fff209' : 'var(--darker-grey)'} />
-      {isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+      {isFavorite ? removeText : addText}
     </Button>
   )
 
@@ -33,14 +31,13 @@ export default function FavorizeButton({ id }) {
   }
 
   function addPodcast() {
-    setFavoritePodcasts([
-      searchedPodcastsByTerm.find(podcast => podcast.id === id),
-      ...favoritePodcasts,
-    ])
+    setFavoritePodcasts([id, ...favoritePodcasts])
   }
 
   function removePodcast() {
-    setFavoritePodcasts(favoritePodcasts.filter(podcast => podcast.id !== id))
+    setFavoritePodcasts(
+      favoritePodcasts.filter(favoriteId => favoriteId !== id)
+    )
   }
 }
 
