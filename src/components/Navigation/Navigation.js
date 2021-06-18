@@ -1,9 +1,13 @@
 import { Home, Search, Star } from 'react-feather'
 
 import { NavLink } from 'react-router-dom'
+import { currentSearchTermState } from '../../states'
 import styled from 'styled-components/macro'
+import { useRecoilValue } from 'recoil'
 
 export default function Navigation() {
+  const currentSearchTerm = useRecoilValue(currentSearchTermState)
+
   const activeStyle = {
     color: 'var(--white)',
     scale: '1.05',
@@ -17,7 +21,10 @@ export default function Navigation() {
           </NavIcon>
           Start
         </StyledNavLink>
-        <StyledNavLink to="/search" activeStyle={activeStyle}>
+        <StyledNavLink
+          to={`/search/${currentSearchTerm}`}
+          activeStyle={activeStyle}
+        >
           <NavIcon>
             <Search size={24} />
           </NavIcon>
