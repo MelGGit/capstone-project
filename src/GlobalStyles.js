@@ -7,7 +7,7 @@ const GlobalStyles = createGlobalStyle`
     --light-black: #41474a;
     --dark-blue: #4D6D9A;
     --mint: #99CED3;
-    --black-akzent: #212121;
+    --black-accent: #212121;
     --darker-grey: #bbb6b6;
     --darkest-grey: #424246;
     --light-grey: #d4d99d;

@@ -10,7 +10,7 @@ export default function DetailedPodcast({ podcast }) {
   return (
     <ContentWrapper>
       <ImageContainer>
-        <Image src={podcast.image} alt={`Poster`} width="40px" height="40px" />
+        <Image src={podcast.image} alt={`Poster`} width="40" height="40" />
       </ImageContainer>
       <InnerContainer>
         <Title>{podcast.title}</Title>
@@ -88,7 +88,7 @@ const TagList = styled.ul`
 `
 
 const Tag = styled.li`
-  background: var(--black-akzent);
+  background: var(--black-accent);
   list-style: none;
   font-size: 0.7rem;
   padding: 0.5rem 0.5rem;
