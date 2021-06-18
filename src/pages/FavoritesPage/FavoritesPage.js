@@ -1,9 +1,9 @@
-import { useRecoilValue } from 'recoil'
-import styled from 'styled-components/macro'
 import BackButton from '../../components/BackButton/BackButton'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
 import PodcastCard from '../../components/PodcastCard/PodcastCard'
 import { favoritePodcastsState } from '../../states'
+import styled from 'styled-components/macro'
+import { useRecoilValue } from 'recoil'
 
 export default function FavoritesPage() {
   const favoritePodcasts = useRecoilValue(favoritePodcastsState)

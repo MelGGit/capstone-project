@@ -18,7 +18,7 @@ export default function DetailedPodcast({ podcast }) {
       </InnerContainer>
       <FavorizeContainer>
         <FavorizeButton
-          id={podcast.id}
+          podcast={podcast}
           addText={'Add to Favorites'}
           removeText={'Remove from Favorites'}
         />
