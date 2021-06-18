@@ -5,17 +5,18 @@ import styled from 'styled-components/macro'
 import { useRecoilState } from 'recoil'
 
 FavorizeButton.propTypes = {
-  id: PropTypes.number.isRequired,
-  addText: PropTypes.string,
-  removeText: PropTypes.string,
+  podcast: PropTypes.object.isRequired,
+  addText: PropTypes.string.isRequired,
+  removeText: PropTypes.string.isRequired,
 }
 
-export default function FavorizeButton({ id, addText, removeText }) {
+export default function FavorizeButton({ podcast, addText, removeText }) {
   const [favoritePodcasts, setFavoritePodcasts] = useRecoilState(
     favoritePodcastsState
   )
+  const { id } = podcast
 
-  const isFavorite = favoritePodcasts.some(favoriteId => favoriteId === id)
+  const isFavorite = favoritePodcasts.some(podcast => podcast.id === id)
 
   return (
     <Button onClick={handleClick}>
@@ -31,13 +32,11 @@ export default function FavorizeButton({ id, addText, removeText }) {
   }
 
   function addPodcast() {
-    setFavoritePodcasts([id, ...favoritePodcasts])
+    setFavoritePodcasts([podcast, ...favoritePodcasts])
   }
 
   function removePodcast() {
-    setFavoritePodcasts(
-      favoritePodcasts.filter(favoriteId => favoriteId !== id)
-    )
+    setFavoritePodcasts(favoritePodcasts.filter(podcast => podcast.id !== id))
   }
 }
 
