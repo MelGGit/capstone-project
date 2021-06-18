@@ -1,59 +1,54 @@
-import styled from 'styled-components/macro'
-import FavorizeButton from '../../components/FavorizeButton/FavorizeButton'
 import BackButton from '../../components/BackButton/BackButton'
-import { PageContainer } from '../../components/PageContainer/PageContainer'
-import { useParams } from 'react-router'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { detailedPodcastState, searchedPodcastsByTermState } from '../../states'
-import { useEffect, useState } from 'react'
+import FavorizeButton from '../../components/FavorizeButton/FavorizeButton'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
+import { PageContainer } from '../../components/PageContainer/PageContainer'
+import styled from 'styled-components/macro'
+import { useParams } from 'react-router'
+import usePodcastByFeedId from '../../hooks/usePodcastByFeedId'
 
 export default function DetailsPage() {
   const { id } = useParams()
-  const [podcastDetails, setPodcastDetails] = useRecoilState(
-    detailedPodcastState
-  )
-  const searchedPodcastsByTerm = useRecoilValue(searchedPodcastsByTermState)
-  const [isLoading, setIsLoading] = useState(true)
+  const { podcastByFeedId, isQuerying } = usePodcastByFeedId(id)
+  console.log(podcastByFeedId)
 
-  useEffect(() => {
-    setIsLoading(true)
-    setPodcastDetails(
-      searchedPodcastsByTerm.find(podcast => podcast.id === Number(id))
+  if (isQuerying)
+    return (
+      <PageWrapper>
+        <BackButton />
+        <LoadingSpinner />
+      </PageWrapper>
     )
-    setTimeout(() => setIsLoading(false), 400)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id])
-
-  const { image, title, author, description, categories } = podcastDetails
 
   return (
     <PageWrapper>
       <BackButton />
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : (
-        <ContentWrapper>
-          <ImageContainer>
-            <Image src={image} alt={`Poster`} width="40px" height="40px" />
-          </ImageContainer>
-          <InnerContainer>
-            <Title>{title}</Title>
-            <Author>{author}</Author>
-          </InnerContainer>
-          <FavorizeContainer>
-            <FavorizeButton id={Number(id)} />
-          </FavorizeContainer>
-          <Text>{description}</Text>
-          {categories && (
-            <TagList>
-              {Object.entries(categories).map(([key, value]) => (
+      <ContentWrapper>
+        <ImageContainer>
+          <Image
+            src={podcastByFeedId.feed.image}
+            alt={`Poster`}
+            width="40px"
+            height="40px"
+          />
+        </ImageContainer>
+        <InnerContainer>
+          <Title>{podcastByFeedId.feed.title}</Title>
+          <Author>{podcastByFeedId.feed.author}</Author>
+        </InnerContainer>
+        <FavorizeContainer>
+          <FavorizeButton id={Number(id)} />
+        </FavorizeContainer>
+        <Text>{podcastByFeedId.feed.description}</Text>
+        {podcastByFeedId.feed.categories && (
+          <TagList>
+            {Object.entries(podcastByFeedId.feed.categories).map(
+              ([key, value]) => (
                 <Tag key={key}>{value}</Tag>
-              ))}
-            </TagList>
-          )}
-        </ContentWrapper>
-      )}
+              )
+            )}
+          </TagList>
+        )}
+      </ContentWrapper>
     </PageWrapper>
   )
 }
