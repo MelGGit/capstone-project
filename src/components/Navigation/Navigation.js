@@ -1,6 +1,7 @@
-import styled from 'styled-components/macro'
-import { Search, Star, Home } from 'react-feather'
+import { Home, Search, Star } from 'react-feather'
+
 import { NavLink } from 'react-router-dom'
+import styled from 'styled-components/macro'
 
 export default function Navigation() {
   const activeStyle = {
@@ -36,7 +37,7 @@ export default function Navigation() {
 
 const Nav = styled.nav`
   padding: 0.5rem 3rem;
-  background: var(--black-akzent);
+  background: var(--black-accent);
   display: flex;
   justify-content: space-around;
   align-items: center;
