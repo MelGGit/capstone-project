@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:3000
+
+### GET podcast by term
+GET {{baseUrl}}/api/byTerm/space
+
+### GET single podcast by feed id
+GET {{baseUrl}}/api/podcastByFeedId/75075
