@@ -1,4 +1,3 @@
-import BackButton from '../../components/BackButton/BackButton'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
 import PodcastCard from '../../components/PodcastCard/PodcastCard'
 import { favoritePodcastsState } from '../../states'
@@ -10,7 +9,6 @@ export default function FavoritesPage() {
 
   return (
     <PageWrapper>
-      <BackButton />
       {favoritePodcasts.map(podcast => (
         <PodcastCard key={podcast.id} podcast={podcast} />
       ))}

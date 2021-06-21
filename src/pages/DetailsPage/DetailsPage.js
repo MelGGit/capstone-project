@@ -1,4 +1,3 @@
-import BackButton from '../../components/BackButton/BackButton'
 import DetailedPodcast from '../../components/DetailedPodcast/DetailedPodcast'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
@@ -13,14 +12,12 @@ export default function DetailsPage() {
   if (isQuerying)
     return (
       <PageWrapper>
-        <BackButton />
         <LoadingSpinner />
       </PageWrapper>
     )
 
   return (
     <PageWrapper>
-      <BackButton />
       <DetailedPodcast podcast={podcastByFeedId.feed} />
     </PageWrapper>
   )
