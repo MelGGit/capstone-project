@@ -1,7 +1,7 @@
 import { matchPath, useLocation } from 'react-router-dom'
 
 import BackButton from '../BackButton/BackButton'
-import Headline from '../Headline/Headline'
+import Header from '../Header/Header'
 import { currentSearchTermState } from '../../states'
 import { useRecoilValue } from 'recoil'
 
@@ -10,15 +10,13 @@ export default function ConditionalHeader() {
   const currentSearchTerm = useRecoilValue(currentSearchTermState)
 
   if (matchPath(pathname, { path: '/', exact: true })) {
-    return <Headline>PodcastFinder</Headline>
+    return <Header>PodcastFinder</Header>
   }
   if (matchPath(pathname, { path: '/search/' })) {
-    return (
-      <Headline small={true}>{`Search for „${currentSearchTerm}“`}</Headline>
-    )
+    return <Header small={true}>{`Search for „${currentSearchTerm}“`}</Header>
   }
   if (matchPath(pathname, { path: '/favorites' })) {
-    return <Headline>Favorites</Headline>
+    return <Header>Favorites</Header>
   }
   if (matchPath(pathname, { path: '/podcast' })) {
     return <BackButton />
