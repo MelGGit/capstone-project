@@ -1,12 +1,10 @@
-
-import Header from './Header'
+import ConditionalHeader from './ConditionalHeader'
 export default {
-    title: 'Header',
-    component: Header
+  title: 'ConditionalHeader',
+  component: ConditionalHeader,
 }
-  
-const Template = args => <Header {...args} />
-  
+
+const Template = args => <ConditionalHeader {...args} />
+
 export const Default = Template.bind({})
 Default.args = {}
-      

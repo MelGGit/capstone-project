@@ -81,9 +81,9 @@ const Text = styled.p`
   font-weight: 100;
   font-size: 0.8rem;
   grid-column: span 2;
+  color: var(--darker-grey);
 `
 const TagList = styled.ul`
-  margin-top: 1rem;
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -99,4 +99,5 @@ const Tag = styled.li`
   border-radius: 10px;
   margin: 0 0.25rem 0.25rem 0;
   display: list-item;
+  color: var(--darker-grey);
 `

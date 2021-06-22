@@ -1,4 +1,5 @@
 import DetailedPodcast from '../../components/DetailedPodcast/DetailedPodcast'
+import EpisodeCardsList from '../../components/EpisodeCardsList/EpisodeCardsList'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
 import { PageContainer } from '../../components/PageContainer/PageContainer'
 import styled from 'styled-components/macro'
@@ -19,7 +20,13 @@ export default function DetailsPage() {
   return (
     <PageWrapper>
       <DetailedPodcast podcast={podcastByFeedId.feed} />
+      <h3>All Episodes</h3>
+      <EpisodeCardsList id={id} />
     </PageWrapper>
   )
 }
-const PageWrapper = styled(PageContainer)``
+const PageWrapper = styled(PageContainer)`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`
