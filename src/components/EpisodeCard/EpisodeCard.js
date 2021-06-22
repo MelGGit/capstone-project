@@ -59,6 +59,8 @@ const Card = styled.section`
   width: 100%;
 `
 const ImageAndTitleContainer = styled.div`
+  height: 48px;
+  width: 100%;
   display: flex;
   gap: 0.7rem;
 `
@@ -68,11 +70,11 @@ const ImageContainer = styled.div`
 `
 const Image = styled.img``
 const Title = styled.h2`
-  height: 33px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1rem;
+  line-height: 1.5rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
