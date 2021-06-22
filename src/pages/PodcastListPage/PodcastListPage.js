@@ -1,13 +1,17 @@
-import styled from 'styled-components/macro'
-import PodcastCard from '../../components/PodcastCard/PodcastCard'
-import { PageContainer } from '../../components/PageContainer/PageContainer'
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner'
+import { PageContainer } from '../../components/PageContainer/PageContainer'
+import PodcastCard from '../../components/PodcastCard/PodcastCard'
+import { currentSearchTermState } from '../../states'
+import styled from 'styled-components/macro'
 import { useParams } from 'react-router-dom'
 import useSearchByTerm from '../../hooks/useSearchByTerm'
+import { useSetRecoilState } from 'recoil'
 
 export default function PodcastListPage() {
   const { id: term } = useParams()
   const { podcastsByTerm, isQuerying } = useSearchByTerm(term)
+  const setCurrentSearchTerm = useSetRecoilState(currentSearchTermState)
+  setCurrentSearchTerm(term)
 
   if (isQuerying)
     return (

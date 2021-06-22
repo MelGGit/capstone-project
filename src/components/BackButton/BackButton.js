@@ -1,6 +1,6 @@
-import { useHistory } from 'react-router-dom'
-import styled from 'styled-components/macro'
 import { ReactComponent as Back } from '../../assets/arrow-left1.svg'
+import styled from 'styled-components/macro'
+import { useHistory } from 'react-router-dom'
 
 export default function BackButton() {
   const { goBack } = useHistory()
@@ -16,6 +16,7 @@ const SVG = styled(Back)`
   width: 1rem;
 `
 const Button = styled.button`
+  padding: 1rem;
   background: none;
   width: 1.5rem;
   height: 1rem;
