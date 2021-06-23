@@ -14,10 +14,10 @@ export default function MainPage() {
         <h2>Trending in Science</h2>
         <SideScroller term={'science'} />
       </TrendingPodcastContainer>
-      {/* <TrendingPodcastContainer>
+      <TrendingPodcastContainer>
         <h2>Trending in Technology</h2>
         <SideScroller term={'technology'} />
-      </TrendingPodcastContainer> */}
+      </TrendingPodcastContainer>
     </PageWrapper>
   )
 
