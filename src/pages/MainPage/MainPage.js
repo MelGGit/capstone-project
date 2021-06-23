@@ -3,35 +3,20 @@ import SearchForm from '../../components/SearchForm/SearchForm'
 import SideScroller from '../../components/SideScoller/SideScroller'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-import useTrending from '../../hooks/useTrending'
 
 export default function MainPage() {
   const { push } = useHistory()
-  const {
-    trending: trendingScience,
-    isQuerying: isQueryingScience,
-  } = useTrending('science')
-  const {
-    trending: trendingTechnology,
-    isQuerying: isQueryingTechnology,
-  } = useTrending('technology')
 
   return (
     <PageWrapper>
       <SearchForm onSubmit={handleSubmit} placeholder={'Podcast'} />
       <TrendingPodcastContainer>
         <h2>Trending in Science</h2>
-        <SideScroller
-          array={trendingScience?.feeds}
-          isQuerying={isQueryingScience}
-        />
+        <SideScroller term={'science'} />
       </TrendingPodcastContainer>
       <TrendingPodcastContainer>
         <h2>Trending in Technology</h2>
-        <SideScroller
-          array={trendingTechnology?.feeds}
-          isQuerying={isQueryingTechnology}
-        />
+        <SideScroller term={'technology'} />
       </TrendingPodcastContainer>
     </PageWrapper>
   )

@@ -2,18 +2,20 @@ import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
 import PropTypes from 'prop-types'
 import SideScrollerPodcastItem from '../SideScrollerPodcastItem/SideScrollerPodcastItem'
 import styled from 'styled-components/macro'
+import useTrending from '../../hooks/useTrending'
 
 SideScroller.propTypes = {
-  array: PropTypes.array,
-  isQuerying: PropTypes.bool,
+  term: PropTypes.string.isRequired,
 }
 
-export default function SideScroller({ array, isQuerying }) {
+export default function SideScroller({ term }) {
+  const { trending, isQuerying } = useTrending(term)
+
   if (isQuerying) return <LoadingSpinner />
 
   return (
     <List>
-      {array.map(el => (
+      {trending.feeds.map(el => (
         <li key={el.id}>
           <SideScrollerPodcastItem podcast={el} />
         </li>
