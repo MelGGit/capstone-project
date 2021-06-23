@@ -1,12 +1,10 @@
-
-import Headline from './Headline'
+import Header from './Header'
 export default {
-    title: 'Headline',
-    component: Headline
+  title: 'Header',
+  component: Header,
 }
-  
-const Template = args => <Headline {...args} />
-  
+
+const Template = args => <Header {...args} />
+
 export const Default = Template.bind({})
 Default.args = {}
-      
