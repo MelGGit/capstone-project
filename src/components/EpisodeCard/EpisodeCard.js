@@ -1,3 +1,4 @@
+import DOMpurify from 'dompurify'
 import LazyLoad from 'react-lazyload'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
@@ -8,21 +9,8 @@ EpisodeCard.propTypes = {
 
 export default function EpisodeCard({ episode }) {
   const { datePublished, duration } = episode
-  const months = [
-    'Jan.',
-    'Feb.',
-    'Mar.',
-    'Apr.',
-    'May.',
-    'Jun.',
-    'Jul.',
-    'Aug.',
-    'Sep.',
-    'Oct.',
-    'Nov.',
-    'Dec.',
-  ]
-  const date = new Date(datePublished * 1000)
+
+  const dateFormat = getDate(datePublished)
   const time = Math.floor(duration / 60)
 
   return (
@@ -41,13 +29,40 @@ export default function EpisodeCard({ episode }) {
 
         <Title>{episode.title}</Title>
       </ImageAndTitleContainer>
-      <Description>{episode.description}</Description>
+      <Description
+        dangerouslySetInnerHTML={{
+          __html: DOMpurify.sanitize(episode.description),
+        }}
+      />
       <Audio controls={true} src={episode.enclosureUrl}></Audio>
-      <Span>{`${date.getDate()} ${
-        months[date.getMonth()]
-      } ${date.getFullYear()} ● ${time === 0 ? 1 : time} min.`}</Span>
+      <Span>{`${dateFormat} ${
+        duration ? `● ${time === 0 ? 1 : time} min.` : ''
+      }`}</Span>
     </Card>
   )
+
+  function getDate(date) {
+    const months = [
+      'Jan.',
+      'Feb.',
+      'Mar.',
+      'Apr.',
+      'May',
+      'Jun.',
+      'Jul.',
+      'Aug.',
+      'Sep.',
+      'Oct.',
+      'Nov.',
+      'Dec.',
+    ]
+    const dateUnformat = new Date(date * 1000)
+    const newDate = `${dateUnformat.getDate()} ${
+      months[dateUnformat.getMonth()]
+    } ${dateUnformat.getFullYear()}`
+
+    return newDate
+  }
 }
 
 const Card = styled.section`
@@ -86,8 +101,13 @@ const Description = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow-wrap: anywhere;
   overflow: hidden;
   color: var(--darker-grey);
+  height: 2rem;
+  line-height: 1rem;
 `
 const Audio = styled.audio``
 const Span = styled.span`

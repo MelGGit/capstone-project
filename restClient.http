@@ -1,10 +1,10 @@
 @baseUrl = http://localhost:3000
 
 ### GET podcast by term
-GET {{baseUrl}}/api/byTerm/bad crypto
+GET {{baseUrl}}/api/byTerm/space
 
 ### GET single podcast by feed id
 GET {{baseUrl}}/api/podcastByFeedId/75075
 
 ### GET all episodes for a podcast by its feed id
-GET {{baseUrl}}/api/episodesByFeedId/439100
+GET {{baseUrl}}/api/episodesByFeedId/75075

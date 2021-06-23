@@ -2,7 +2,7 @@ import fetchDataFromDB from '../fetchDataFromDB.js'
 
 export default async function podcastByFeedId(req, res) {
   const feedId = req.query.episodesByFeedId
-  const url = '/episodes/byfeedid?id=' + feedId
+  const url = `/episodes/byfeedid?id=${feedId}`
 
   const episodesByFeedId = await fetchDataFromDB(url)
 
