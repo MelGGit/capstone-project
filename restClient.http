@@ -8,3 +8,6 @@ GET {{baseUrl}}/api/podcastByFeedId/75075
 
 ### GET all episodes for a podcast by its feed id
 GET {{baseUrl}}/api/episodesByFeedId/75075
+
+### GET all trending in science episodes max 10
+GET {{baseUrl}}/api/trending/max=10&cat=science

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
 Header.propTypes = {
-  childre: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
   small: PropTypes.bool,
 }
 
