@@ -8,11 +8,13 @@ import MainPage from './pages/MainPage/MainPage'
 import Navigation from './components/Navigation/Navigation'
 import PodcastListPage from './pages/PodcastListPage/PodcastListPage'
 import React from 'react'
+import SearchPage from './pages/SearchPage/SearchPage'
 import styled from 'styled-components/macro'
 
 export default function App() {
   const routes = [
     { path: '/', Component: MainPage, exact: true },
+    { path: '/search/', Component: SearchPage, exact: true },
     { path: '/search/:id', Component: PodcastListPage },
     { path: '/favorites', Component: FavoritesPage },
     { path: '/podcast/:id', Component: DetailsPage },
