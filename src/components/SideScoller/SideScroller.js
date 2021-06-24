@@ -15,9 +15,9 @@ export default function SideScroller({ term }) {
 
   return (
     <List>
-      {trending.feeds.map(el => (
-        <li key={el.id}>
-          <SideScrollerPodcastItem podcast={el} />
+      {trending.feeds.map(podcast => (
+        <li key={podcast.id}>
+          <SideScrollerPodcastItem podcast={podcast} />
         </li>
       ))}
     </List>

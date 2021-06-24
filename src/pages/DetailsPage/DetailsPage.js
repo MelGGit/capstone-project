@@ -21,7 +21,7 @@ export default function DetailsPage() {
     <PageWrapper>
       <DetailedPodcast podcast={podcastByFeedId.feed} />
       <h3>All Episodes</h3>
-      <EpisodeCardsList id={id} />
+      <EpisodeCardsList id={Number(id)} />
     </PageWrapper>
   )
 }

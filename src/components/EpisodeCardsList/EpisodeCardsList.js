@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 import useEpisodesByFeedId from '../../hooks/useEpisodesByFeedId'
 
 EpisodeCardsList.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 }
 
 export default function EpisodeCardsList({ id }) {
