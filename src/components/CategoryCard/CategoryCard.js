@@ -7,7 +7,7 @@ CategoryCard.propTypes = {
 }
 export default function CategoryCard({ category }) {
   return (
-    <StyledLink to={`/search/cat/${category.name.toLowerCase()}`}>
+    <StyledLink to={`/search/cat/${category.name}`}>
       <Card color={category.color}>{category.name}</Card>
     </StyledLink>
   )

@@ -4,6 +4,8 @@ const file = fs.readFileSync('./categories.json', 'utf8')
 const json = JSON.parse(file)
 json.feeds.forEach(el => (el.color = randomColor()))
 
+json.feeds.sort((a, b) => a.name.localeCompare(b.name))
+
 const stringJson = JSON.stringify(json)
 
 fs.writeFileSync('./src/categories.json', stringJson, 'utf8')

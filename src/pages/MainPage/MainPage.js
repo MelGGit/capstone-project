@@ -7,11 +7,11 @@ export default function MainPage() {
     <PageWrapper>
       <TrendingPodcastContainer>
         <h2>Trending in Science</h2>
-        <SideScroller term={'science'} />
+        <SideScroller term={'max=10&cat=science'} />
       </TrendingPodcastContainer>
       <TrendingPodcastContainer>
         <h2>Trending in Technology</h2>
-        <SideScroller term={'technology'} />
+        <SideScroller term={'max=10&cat=technology'} />
       </TrendingPodcastContainer>
     </PageWrapper>
   )
