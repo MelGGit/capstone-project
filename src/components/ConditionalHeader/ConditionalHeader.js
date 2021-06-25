@@ -20,9 +20,7 @@ export default function ConditionalHeader() {
   if (matchPath(pathname, { path: `/search/`, exact: true })) {
     return <Header>{'Search'}</Header>
   }
-  if (
-    matchPath(pathname, { path: `/search/${currentSearchTerm}`, exact: true })
-  ) {
+  if (matchPath(pathname, { path: `/search/${currentSearchTerm}` })) {
     return (
       <Container>
         <Back exact to="/search/" onClick={() => setCurrentSearchTerm('')}>
