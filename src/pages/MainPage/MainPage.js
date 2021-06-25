@@ -1,43 +1,30 @@
 import { PageContainer } from '../../components/PageContainer/PageContainer'
-import SearchForm from '../../components/SearchForm/SearchForm'
 import SideScroller from '../../components/SideScoller/SideScroller'
 import styled from 'styled-components'
-import { useHistory } from 'react-router-dom'
 
 export default function MainPage() {
-  const { push } = useHistory()
+  const sliders = ['Science', 'Technology', 'Investing']
 
   return (
     <PageWrapper>
-      <SearchForm onSubmit={handleSubmit} placeholder={'Podcast'} />
-      <TrendingPodcastContainer>
-        <h2>Trending in Science</h2>
-        <SideScroller term={'science'} />
-      </TrendingPodcastContainer>
-      <TrendingPodcastContainer>
-        <h2>Trending in Technology</h2>
-        <SideScroller term={'technology'} />
-      </TrendingPodcastContainer>
+      {sliders.map(term => (
+        <TrendingPodcastContainer key={term}>
+          <h2>Trending in {term}</h2>
+          <SideScroller term={`max=15&cat=${term.toLowerCase()}`} />
+        </TrendingPodcastContainer>
+      ))}
     </PageWrapper>
   )
-
-  function handleSubmit(event) {
-    event.preventDefault()
-    const form = event.target
-    const term = form.elements.search.value
-    push(`/search/${term}`)
-    form.reset()
-  }
 }
 const PageWrapper = styled(PageContainer)`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  display: grid;
+  gap: 1rem;
 `
 
 const TrendingPodcastContainer = styled.section`
-  height: 12rem;
+  height: 13rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  overflow-x: scroll;
 `

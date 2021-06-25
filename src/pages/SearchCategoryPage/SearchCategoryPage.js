@@ -4,13 +4,12 @@ import PodcastCard from '../../components/PodcastCard/PodcastCard'
 import { currentSearchTermState } from '../../states'
 import styled from 'styled-components/macro'
 import { useParams } from 'react-router-dom'
-import useSearchByTerm from '../../hooks/useSearchByTerm'
 import { useSetRecoilState } from 'recoil'
+import useTrending from '../../hooks/useTrending'
 
-export default function PodcastListPage() {
+export default function SearchCategoryPage() {
   const { id: term } = useParams()
-  console.log(term)
-  const { podcastsByTerm, isQuerying } = useSearchByTerm(term)
+  const { trending, isQuerying } = useTrending(`max=40&cat=${term}`)
   const setCurrentSearchTerm = useSetRecoilState(currentSearchTermState)
   setCurrentSearchTerm(term)
 
@@ -23,7 +22,7 @@ export default function PodcastListPage() {
 
   return (
     <PageWrapper>
-      {podcastsByTerm.feeds.map(podcast => (
+      {trending.feeds.map(podcast => (
         <PodcastCard key={podcast.id} podcast={podcast} />
       ))}
     </PageWrapper>
