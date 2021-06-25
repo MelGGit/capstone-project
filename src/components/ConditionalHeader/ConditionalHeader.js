@@ -20,7 +20,9 @@ export default function ConditionalHeader() {
   if (matchPath(pathname, { path: `/search/`, exact: true })) {
     return <Header>{'Search'}</Header>
   }
-  if (matchPath(pathname, { path: `/search/${currentSearchTerm}` })) {
+  if (
+    matchPath(pathname, { path: `/search/${currentSearchTerm}`, exact: true })
+  ) {
     return (
       <Container>
         <Back exact to="/search/" onClick={() => setCurrentSearchTerm('')}>
@@ -30,6 +32,19 @@ export default function ConditionalHeader() {
           margin={true}
           small={true}
         >{`Search for „${currentSearchTerm}“`}</Header>
+      </Container>
+    )
+  }
+  if (matchPath(pathname, { path: `/search/cat/` })) {
+    return (
+      <Container>
+        <Back exact to="/search/" onClick={() => setCurrentSearchTerm('')}>
+          <ArrowLeft />
+        </Back>
+        <Header
+          margin={true}
+          small={true}
+        >{`Search in category „${currentSearchTerm}“`}</Header>
       </Container>
     )
   }

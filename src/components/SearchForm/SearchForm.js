@@ -1,6 +1,6 @@
-import styled from 'styled-components/macro'
-import { Search } from 'react-feather'
 import PropTypes from 'prop-types'
+import { Search } from 'react-feather'
+import styled from 'styled-components/macro'
 
 SearchForm.propTypes = {
   onSubmit: PropTypes.func,
@@ -14,7 +14,7 @@ export default function SearchForm({ onSubmit, placeholder }) {
         <SearchIconContainer>
           <SearchIcon />
         </SearchIconContainer>
-        <Input name={'search'} placeholder={placeholder} />
+        <Input name={'search'} placeholder={placeholder} autoComplete="off" />
       </Wrapper>
     </Form>
   )
