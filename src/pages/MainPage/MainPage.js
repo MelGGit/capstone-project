@@ -3,28 +3,28 @@ import SideScroller from '../../components/SideScoller/SideScroller'
 import styled from 'styled-components'
 
 export default function MainPage() {
+  const sliders = ['Science', 'Technology', 'Cryptocurrency']
+
   return (
     <PageWrapper>
-      <TrendingPodcastContainer>
-        <h2>Trending in Science</h2>
-        <SideScroller term={'max=10&cat=science'} />
-      </TrendingPodcastContainer>
-      <TrendingPodcastContainer>
-        <h2>Trending in Technology</h2>
-        <SideScroller term={'max=10&cat=technology'} />
-      </TrendingPodcastContainer>
+      {sliders.map(term => (
+        <TrendingPodcastContainer key={term}>
+          <h2>Trending in {term}</h2>
+          <SideScroller term={`max=15&cat=${term.toLowerCase()}`} />
+        </TrendingPodcastContainer>
+      ))}
     </PageWrapper>
   )
 }
 const PageWrapper = styled(PageContainer)`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  display: grid;
+  gap: 1rem;
 `
 
 const TrendingPodcastContainer = styled.section`
-  height: 12rem;
+  height: 13rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  overflow-x: scroll;
 `
