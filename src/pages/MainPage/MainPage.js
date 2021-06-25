@@ -3,7 +3,7 @@ import SideScroller from '../../components/SideScoller/SideScroller'
 import styled from 'styled-components'
 
 export default function MainPage() {
-  const sliders = ['Science', 'Technology', 'Cryptocurrency']
+  const sliders = ['Science', 'Technology', 'Investing']
 
   return (
     <PageWrapper>
