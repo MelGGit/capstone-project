@@ -6,9 +6,10 @@ import useEpisodesByFeedId from '../../hooks/useEpisodesByFeedId'
 
 EpisodeCardsList.propTypes = {
   id: PropTypes.number.isRequired,
+  author: PropTypes.string,
 }
 
-export default function EpisodeCardsList({ id }) {
+export default function EpisodeCardsList({ id, author }) {
   const { episodesByFeedId, isQuerying } = useEpisodesByFeedId(id)
 
   if (isQuerying) {
@@ -19,7 +20,7 @@ export default function EpisodeCardsList({ id }) {
     <EpisodeList>
       {episodesByFeedId.items.map(episode => (
         <li key={episode.id}>
-          <EpisodeCard episode={episode} />
+          <EpisodeCard episode={episode} author={author} />
         </li>
       ))}
     </EpisodeList>

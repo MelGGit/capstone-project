@@ -1,14 +1,21 @@
+import { useResetRecoilState, useSetRecoilState } from 'recoil'
+
 import DOMpurify from 'dompurify'
 import LazyLoad from 'react-lazyload'
+import { Play } from 'react-feather'
 import PropTypes from 'prop-types'
+import { playState } from '../../states'
 import styled from 'styled-components/macro'
 
 EpisodeCard.propTypes = {
   episode: PropTypes.object.isRequired,
+  author: PropTypes.string,
 }
 
-export default function EpisodeCard({ episode }) {
+export default function EpisodeCard({ episode, author }) {
   const { datePublished, duration } = episode
+  const setPlay = useSetRecoilState(playState)
+  const resetPlay = useResetRecoilState(playState)
 
   const dateFormat = getDate(datePublished)
   const time = Math.floor(duration / 60)
@@ -34,12 +41,29 @@ export default function EpisodeCard({ episode }) {
           __html: DOMpurify.sanitize(episode.description),
         }}
       />
-      <Audio controls={true} src={episode.enclosureUrl}></Audio>
+      <PlayButton onClick={handleClick}>
+        <Play
+          fill={'var(--black'}
+          strokeWidth={1}
+          color={'car(--white'}
+          height={12}
+        />
+      </PlayButton>
       <Span>{`${dateFormat} ${
         duration ? `● ${time === 0 ? 1 : time} min.` : ''
       }`}</Span>
     </Card>
   )
+  function handleClick() {
+    const playObject = {
+      image: episode.feedImage,
+      title: episode.title,
+      author,
+      audioSrc: episode.enclosureUrl,
+    }
+    resetPlay()
+    setPlay(playObject)
+  }
 
   function getDate(date) {
     const months = [
@@ -109,7 +133,16 @@ const Description = styled.p`
   height: 2rem;
   line-height: 1rem;
 `
-const Audio = styled.audio``
+const PlayButton = styled.button`
+  display: grid;
+  place-items: center;
+  border-radius: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  padding: 0.2rem 0.2rem 0.2rem 0.05rem;
+`
+
 const Span = styled.span`
   font-weight: 100;
   font-size: 0.8rem;

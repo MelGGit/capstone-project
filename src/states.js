@@ -14,3 +14,8 @@ export const favoritePodcastsState = atom({
   key: 'favoritePodcasts',
   default: [],
 })
+
+export const playState = atom({
+  key: 'play',
+  default: {},
+})
