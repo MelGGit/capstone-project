@@ -21,16 +21,13 @@ export default function AudioPlayer({ image, title, author, audioSrc }) {
 
   const { duration } = audioRef.current
 
-  console.log(progress)
-
   // some setup before playing
   useEffect(() => {
     setProgress(audioRef.current.currentTime)
 
     if (isReady) {
-      console.log('test')
-      // setIsPlaying(true)
-      // startTimer()
+      setIsPlaying(true)
+      startTimer()
     }
     if (!isReady) setIsReady(true)
   }, [isReady])
@@ -62,7 +59,7 @@ export default function AudioPlayer({ image, title, author, audioSrc }) {
         value={progress}
         step="1"
         min="0"
-        max={duration ? duration : `${duration}`}
+        max={duration ? duration : `${duration}`} // duration is NaN at first
       />
       <TrackInfo>
         <Image src={image} alt={`track artork for ${title} by ${author}`} />
