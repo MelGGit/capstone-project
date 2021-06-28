@@ -27,7 +27,7 @@ export default function App() {
     { path: '/podcast/:id', Component: DetailsPage },
   ]
   return (
-    <AppContainer>
+    <AppContainer isPlay={play}>
       <ConditionalHeader />
       <Switch>
         {routes.map(({ Component, ...routeProps }) => (
@@ -36,17 +36,21 @@ export default function App() {
           </Route>
         ))}
       </Switch>
-      <BottomContainer>
-        <AudioPlayer playObject={play} />
+      {play ? (
+        <BottomContainer>
+          <AudioPlayer audioObject={play} />
+          <Navigation />
+        </BottomContainer>
+      ) : (
         <Navigation />
-      </BottomContainer>
+      )}
     </AppContainer>
   )
 }
 
 const AppContainer = styled(Div100vh)`
   display: grid;
-  grid-template-rows: 3rem 1fr 6.1rem;
+  grid-template-rows: 3rem 1fr ${props => (props.isPlay ? '6.1rem' : '3rem')};
 `
 const BottomContainer = styled.div`
   display: grid;

@@ -15,7 +15,7 @@ export default function ConditionalHeader() {
   )
 
   if (matchPath(pathname, { path: '/', exact: true })) {
-    return <Header>PodcastFinder</Header>
+    return <Header>PodPal</Header>
   }
   if (matchPath(pathname, { path: `/search/`, exact: true })) {
     return <Header>{'Search'}</Header>

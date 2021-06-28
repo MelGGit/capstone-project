@@ -1,19 +1,23 @@
 import { useEffect, useRef, useState } from 'react'
 
 import AudioControls from '../AudioControls/AudioControls.js'
+import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-export default function AudioPlayer({ playObject }) {
+AudioPlayer.propTyped = {
+  audioObject: PropTypes.object,
+}
+
+export default function AudioPlayer({ audioObject }) {
   const [progress, setProgress] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isReady, setIsReady] = useState(false)
 
-  const { image, title, author, audioSrc } = playObject
+  const { image, title, author, audioSrc } = audioObject
   const audioRef = useRef(new Audio(audioSrc))
   const intervalRef = useRef()
 
   const { duration } = audioRef.current
-  console.log(audioRef)
 
   // some setup before playing
   useEffect(() => {
@@ -47,8 +51,6 @@ export default function AudioPlayer({ playObject }) {
       clearInterval(intervalRef.current)
     }
   }, [audioSrc])
-
-  if (!audioSrc) return <div>Nothing here</div>
 
   return (
     <AudioContainer>

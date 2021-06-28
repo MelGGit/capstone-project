@@ -41,17 +41,20 @@ export default function EpisodeCard({ episode, author }) {
           __html: DOMpurify.sanitize(episode.description),
         }}
       />
-      <PlayButton onClick={handleClick}>
-        <Play
-          fill={'var(--black'}
-          strokeWidth={1}
-          color={'car(--white'}
-          height={12}
-        />
-      </PlayButton>
-      <Span>{`${dateFormat} ${
-        duration ? `● ${time === 0 ? 1 : time} min.` : ''
-      }`}</Span>
+
+      <BottomContainer>
+        <Span>{`${dateFormat} ${
+          duration ? `● ${time === 0 ? 1 : time} min.` : ''
+        }`}</Span>
+        <PlayButton onClick={handleClick}>
+          <Play
+            fill={'var(--black'}
+            strokeWidth={1}
+            color={'car(--white'}
+            height={12}
+          />
+        </PlayButton>
+      </BottomContainer>
     </Card>
   )
   function handleClick() {
@@ -133,6 +136,13 @@ const Description = styled.p`
   height: 2rem;
   line-height: 1rem;
 `
+const BottomContainer = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+`
+
 const PlayButton = styled.button`
   display: grid;
   place-items: center;
