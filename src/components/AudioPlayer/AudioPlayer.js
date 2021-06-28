@@ -11,7 +11,6 @@ AudioPlayer.propTyped = {
 export default function AudioPlayer({ audioObject }) {
   const [progress, setProgress] = useState(0)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [isReady, setIsReady] = useState(false)
 
   const { image, title, author, audioSrc } = audioObject
   const audioRef = useRef(new Audio(audioSrc))
@@ -23,14 +22,7 @@ export default function AudioPlayer({ audioObject }) {
   useEffect(() => {
     audioRef.current = new Audio(audioSrc)
     setProgress(audioRef.current.currentTime)
-
-    if (isReady) {
-      audioRef.current.play()
-      setIsPlaying(true)
-      startTimer()
-    }
-    if (!isReady) setIsReady(true)
-  }, [isReady, audioSrc])
+  }, [audioSrc])
 
   // handle changes when clicking play and pause button
   useEffect(() => {
