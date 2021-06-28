@@ -4,7 +4,7 @@ import AudioControls from '../AudioControls/AudioControls.js'
 import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
-AudioPlayer.propTyped = {
+AudioPlayer.propTypes = {
   audioObject: PropTypes.object,
 }
 
@@ -63,7 +63,7 @@ export default function AudioPlayer({ audioObject }) {
         max={duration ? duration : `${duration}`} // duration is NaN at first
       />
       <TrackInfo>
-        <Image src={image} alt={`track artork for ${title} by ${author}`} />
+        <Image src={image} alt={`track artwork for ${title} by ${author}`} />
         <TitleAndAuthorContainer>
           <Title>{title}</Title>
           <Author>{author}</Author>
