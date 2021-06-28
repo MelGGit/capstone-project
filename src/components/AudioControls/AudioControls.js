@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components/macro'
 
 AudioControls.propTypes = {
-  isPlaying: PropTypes.bool,
-  onPlayPauseClick: PropTypes.func,
+  isPlaying: PropTypes.bool.isRequired,
+  onPlayPauseClick: PropTypes.func.isRequired,
 }
 
 export default function AudioControls({ isPlaying, onPlayPauseClick }) {

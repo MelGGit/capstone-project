@@ -28,7 +28,7 @@ export default function App() {
     { path: '/podcast/:id', Component: DetailsPage },
   ]
   return (
-    <AppContainer isPlay={play}>
+    <AppContainer isActive={play}>
       <WaveBackground />
       <ConditionalHeader />
       <Switch>
@@ -52,7 +52,7 @@ export default function App() {
 
 const AppContainer = styled(Div100vh)`
   display: grid;
-  grid-template-rows: 3rem 1fr ${props => (props.isPlay ? '6.1rem' : '3rem')};
+  grid-template-rows: 3rem 1fr ${props => (props.isActive ? '6.1rem' : '3rem')};
   position: relative;
 `
 

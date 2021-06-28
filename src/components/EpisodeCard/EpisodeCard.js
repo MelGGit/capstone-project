@@ -46,7 +46,7 @@ export default function EpisodeCard({ episode, author }) {
         <Span>{`${dateFormat} ${
           duration ? `● ${time === 0 ? 1 : time} min.` : ''
         }`}</Span>
-        <PlayButton onClick={handleClick}>
+        <PlayButton onClick={playEpisode}>
           <Play
             fill={'var(--black'}
             strokeWidth={1}
@@ -57,7 +57,7 @@ export default function EpisodeCard({ episode, author }) {
       </BottomContainer>
     </Card>
   )
-  function handleClick() {
+  function playEpisode() {
     const playObject = {
       image: episode.feedImage,
       title: episode.title,
