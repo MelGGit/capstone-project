@@ -22,4 +22,5 @@ const StyledHeader = styled.header`
   margin-left: ${props => (props.margin ? '-2rem' : '')};
   place-items: center;
   font-size: ${props => (props.small ? ' 1rem' : '1.5rem')};
+  background: var(--black-accent);
 `

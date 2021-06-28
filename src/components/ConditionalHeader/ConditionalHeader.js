@@ -37,7 +37,7 @@ export default function ConditionalHeader() {
     return (
       <Container>
         <Back exact to="/search/" onClick={() => setCurrentSearchTerm('')}>
-          <ArrowLeft />
+          <ArrowLeft strokeWidth={1} />
         </Back>
         <Header
           margin={true}
@@ -50,13 +50,23 @@ export default function ConditionalHeader() {
     return <Header>Favorites</Header>
   }
   if (matchPath(pathname, { path: '/podcast' })) {
-    return <BackButton />
+    return (
+      <BackContainer>
+        <BackButton />
+      </BackContainer>
+    )
   }
 }
+
+const BackContainer = styled.div`
+  width: 100%;
+  background: var(--black-accent);
+`
 
 const Container = styled.div`
   display: flex;
   align-items: center;
+  background: var(--black-accent);
 `
 
 const Back = styled(Link)`

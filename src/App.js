@@ -11,6 +11,7 @@ import PodcastListPage from './pages/PodcastListPage/PodcastListPage'
 import React from 'react'
 import SearchCategoryPage from './pages/SearchCategoryPage/SearchCategoryPage'
 import SearchPage from './pages/SearchPage/SearchPage'
+import WaveBackground from './components/WaveBackground/WaveBackground'
 import { playState } from './states'
 import styled from 'styled-components/macro'
 import { useRecoilValue } from 'recoil'
@@ -28,6 +29,7 @@ export default function App() {
   ]
   return (
     <AppContainer isPlay={play}>
+      <WaveBackground />
       <ConditionalHeader />
       <Switch>
         {routes.map(({ Component, ...routeProps }) => (
@@ -51,7 +53,9 @@ export default function App() {
 const AppContainer = styled(Div100vh)`
   display: grid;
   grid-template-rows: 3rem 1fr ${props => (props.isPlay ? '6.1rem' : '3rem')};
+  position: relative;
 `
+
 const BottomContainer = styled.div`
   display: grid;
   grid-template-rows: 3rem 3rem;
