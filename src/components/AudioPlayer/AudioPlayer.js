@@ -99,8 +99,8 @@ const Progressbar = styled.input`
   position: absolute;
   -webkit-appearance: none;
   background: transparent;
-  height: 0.1rem;
-  top: -0.15rem;
+  height: 0.5rem;
+  top: -0.25rem;
   left: 0;
   width: 100%;
   z-index: 10;
