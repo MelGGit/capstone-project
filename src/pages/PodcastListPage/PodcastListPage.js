@@ -9,7 +9,6 @@ import { useSetRecoilState } from 'recoil'
 
 export default function PodcastListPage() {
   const { id: term } = useParams()
-  console.log(term)
   const { podcastsByTerm, isQuerying } = useSearchByTerm(term)
   const setCurrentSearchTerm = useSetRecoilState(currentSearchTermState)
   setCurrentSearchTerm(term)

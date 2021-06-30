@@ -1,8 +1,7 @@
-import React from 'react';
 import GlobalStyles from '../src/GlobalStyles';
-import { RecoilRoot } from 'recoil';
 import { MemoryRouter } from 'react-router-dom';
-
+import React from 'react';
+import { RecoilRoot } from 'recoil';
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -11,6 +10,9 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
+    viewport: {
+      defaultViewport: 'Mobile'
+    }
   },
 }
 

@@ -1,5 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
 
+import AudioPlayer from './components/AudioPlayer/AudioPlayer'
 import ConditionalHeader from './components/ConditionalHeader/ConditionalHeader'
 import DetailsPage from './pages/DetailsPage/DetailsPage'
 import Div100vh from 'react-div-100vh'
@@ -10,9 +11,14 @@ import PodcastListPage from './pages/PodcastListPage/PodcastListPage'
 import React from 'react'
 import SearchCategoryPage from './pages/SearchCategoryPage/SearchCategoryPage'
 import SearchPage from './pages/SearchPage/SearchPage'
+import WaveBackground from './components/WaveBackground/WaveBackground'
+import { playState } from './states'
 import styled from 'styled-components/macro'
+import { useRecoilValue } from 'recoil'
 
 export default function App() {
+  const play = useRecoilValue(playState)
+
   const routes = [
     { path: '/', Component: MainPage, exact: true },
     { path: '/search/', Component: SearchPage, exact: true },
@@ -22,7 +28,8 @@ export default function App() {
     { path: '/podcast/:id', Component: DetailsPage },
   ]
   return (
-    <AppContainer>
+    <AppContainer isActive={play}>
+      <WaveBackground />
       <ConditionalHeader />
       <Switch>
         {routes.map(({ Component, ...routeProps }) => (
@@ -31,12 +38,26 @@ export default function App() {
           </Route>
         ))}
       </Switch>
-      <Navigation />
+      {play ? (
+        <BottomContainer>
+          <AudioPlayer audioObject={play} />
+          <Navigation />
+        </BottomContainer>
+      ) : (
+        <Navigation />
+      )}
     </AppContainer>
   )
 }
 
 const AppContainer = styled(Div100vh)`
   display: grid;
-  grid-template-rows: 3rem 1fr 3rem;
+  grid-template-rows: 3rem 1fr ${props => (props.isActive ? '6.1rem' : '3rem')};
+  position: relative;
+`
+
+const BottomContainer = styled.div`
+  display: grid;
+  grid-template-rows: 3rem 3rem;
+  gap: 0.1rem;
 `
