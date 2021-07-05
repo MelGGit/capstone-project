@@ -1,9 +1,6 @@
-/* eslint-disable jest/valid-expect-in-promise */
-/* eslint-disable no-undef */
-import React from 'react'
-import { mount } from '@cypress/react'
 import FavorizeButton from '../components/FavorizeButton/FavorizeButton'
 import { RecoilRoot } from 'recoil'
+import { mount } from '@cypress/react'
 import { searchedPodcastsByTermState } from '../states'
 
 it('renders a text', () => {
